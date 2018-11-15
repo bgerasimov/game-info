@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using GameInfo.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using GameInfo.Models;
 
 namespace GameInfo
 {
@@ -37,8 +38,30 @@ namespace GameInfo
             services.AddDbContext<GameInfoContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+
+            services.AddIdentity<GameInfoUser, IdentityRole>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<GameInfoContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Account/Login";
+                options.LogoutPath = $"/Account/Logout";
+            });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredUniqueChars = 3;
+
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.SignIn.RequireConfirmedEmail = false;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

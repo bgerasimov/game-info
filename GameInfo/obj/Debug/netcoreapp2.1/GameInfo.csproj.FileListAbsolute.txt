@@ -5,7 +5,6 @@ C:\Users\killme\source\repos\GameInfo\GameInfo\bin\Debug\netcoreapp2.1\GameInfo.
 C:\Users\killme\source\repos\GameInfo\GameInfo\bin\Debug\netcoreapp2.1\GameInfo.pdb
 C:\Users\killme\source\repos\GameInfo\GameInfo\bin\Debug\netcoreapp2.1\GameInfo.Views.dll
 C:\Users\killme\source\repos\GameInfo\GameInfo\bin\Debug\netcoreapp2.1\GameInfo.Views.pdb
-C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.csprojAssemblyReference.cache
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.csproj.CoreCompileInputs.cache
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.RazorAssemblyInfo.cache
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.RazorAssemblyInfo.cs
@@ -33,3 +32,4 @@ C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.dll
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.pdb
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.csproj.CopyComplete
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.csprojAssemblyReference.cache

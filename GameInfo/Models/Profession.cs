@@ -10,22 +10,19 @@ namespace GameInfo.Models
     {
         public Profession()
         {
-            this.UsableWeapons = new HashSet<WeaponType>();
-            this.CombatTypes = new HashSet<CombatType>();
-            this.ClassRoles = new HashSet<ClassRole>();
-            this.AvailableTo = new HashSet<Race>();
+            this.Races = new HashSet<RaceProfession>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public ICollection<WeaponType> UsableWeapons { get; set; }
+        public WeaponType UsableWeapon { get; set; }
 
-        public ICollection<CombatType> CombatTypes { get; set; }
+        public CombatType CombatType { get; set; }
 
-        public ICollection<ClassRole> ClassRoles { get; set; }
+        public ClassRole ClassRole { get; set; }
 
-        public ICollection<Race> AvailableTo { get; set; }
+        public virtual ICollection<RaceProfession> Races { get; set; }
     }
 }

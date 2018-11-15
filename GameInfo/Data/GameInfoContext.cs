@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GameInfo.Data
 {
-    public class GameInfoContext : IdentityDbContext
+    public class GameInfoContext : IdentityDbContext<GameInfoUser>
     {
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<Dungeon> Dungeons { get; set; }
@@ -17,10 +17,18 @@ namespace GameInfo.Data
         public DbSet<Profession> Professions { get; set; }
         public DbSet<Quest> Quests { get; set; }
         public DbSet<Race> Races { get; set; }
+        public DbSet<RaceProfession> RaceProfessions { get; set; }
 
         public GameInfoContext(DbContextOptions<GameInfoContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<RaceProfession>()
+                .HasKey(rp => new { rp.RaceId, rp.ProfessionId });
+            base.OnModelCreating(builder);            
         }
     }
 }
