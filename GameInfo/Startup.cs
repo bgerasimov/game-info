@@ -86,12 +86,35 @@ namespace GameInfo
 
             app.UseAuthentication();
 
+            SeedRoles(app).Wait();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private async Task SeedRoles(IApplicationBuilder applicationBuilder)
+        {
+            IServiceScopeFactory scopeFactory = applicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+
+            using (IServiceScope scope = scopeFactory.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var roleCheckAdmin = await roleManager.RoleExistsAsync("Admin");
+                if (!roleCheckAdmin)
+                {
+                    await roleManager.CreateAsync(new IdentityRole("Admin"));
+                }
+                var roleCheckUser = await roleManager.RoleExistsAsync("User");
+                if (!roleCheckUser)
+                {
+                    await roleManager.CreateAsync(new IdentityRole("User"));
+                }
+            }
         }
     }
 }
