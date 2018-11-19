@@ -33,3 +33,6 @@ C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.pdb
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.csproj.CopyComplete
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\GameInfo.csprojAssemblyReference.cache
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.g.cshtml.cs
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Account\Logout.g.cshtml.cs

@@ -1,20 +1,5 @@
-﻿@{ var linkItems = new string[] { "Guides", "Items", "NPCs", "Races", "Professions", "Quests", "Dungeons", "Achievements" };}
-
-<div class="container col-md-11 center-block" style="padding-top:20px">
-    <div class="container-fluid" style="background-color:black; border-radius: 12px">
-        <div class="row text-center" style="float:none; padding-top:12px; border-radius: 12px">
-            @for (int i = 0; i < linkItems.Length; i++)
-            {
-            <div class="col-md-1">
-                <p><a asp-controller="@linkItems[i]" asp-action="Index" style="color:white">@linkItems[i]</a></p>
-            </div>
-            }            
-        </div>
-        <hr style="background-color:#194054; margin:0px"/>
-        <div class="row text-center" style="float:none; padding:12px;">
-            <div class="col-md-11">
-                <h3 class="text-white">No guides available.</h3>
-            </div>
-        </div>
+﻿<div class="row text-center" style="float:none; padding:12px;">
+    <div class="col-md-11">
+        <h3 class="text-white">No guides available.</h3>
     </div>
 </div>

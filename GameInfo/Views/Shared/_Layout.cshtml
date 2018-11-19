@@ -8,7 +8,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="icon" href="~/favicon.ico"/>
+        <link rel="icon" href="~/favicon.ico" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -28,12 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
-                </li>
+                @await  Html.PartialAsync("_LoginPartial")
                 <!--
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -52,13 +47,28 @@
     </nav>
 
     <div class="container-fluid">
-        @RenderBody()        
+        @{ var linkItems = new string[] { "Guides", "Items", "NPCs", "Races", "Professions", "Quests", "Dungeons", "Achievements" };}
+
+        <div class="container col-md-11 center-block" style="padding-top:20px">
+            <div class="container-fluid" style="background-color:black; border-radius: 12px">
+                <div class="row text-center" style="float:none; padding-top:12px; border-radius: 12px">
+                    @for (int i = 0; i < linkItems.Length; i++)
+                    {
+                        <div class="col-md-1">
+                            <p><a asp-controller="@linkItems[i]" asp-action="Index" style="color:white">@linkItems[i]</a></p>
+                        </div>
+                    }
+                </div>
+                <hr style="background-color:#194054; margin:0px" />
+                @RenderBody()
+            </div>
+        </div>
     </div>
-    <div class="text-center" style="position:absolute; left:45% ;bottom:0; border-top: solid 1px white">        
+    <div class="text-center" style="position:absolute; left:45% ;bottom:0; border-top: solid 1px white">
         <footer class="text-white" style="padding-bottom:6px;">
             &copy; 2018 - GameInfo
         </footer>
-    </div>    
+    </div>
     <environment include="Development">
         <script src="~/js/jquery-3.3.1.min.js"></script>
         <script src="~/js/bootstrap.bundle.min.js"></script>
