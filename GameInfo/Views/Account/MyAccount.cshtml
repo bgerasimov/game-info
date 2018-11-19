@@ -1,0 +1,31 @@
+﻿@model GameInfo.Models.ViewModels.AccountViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-3" style="padding:2%">
+        @if (Model.AvatarUrl == null)
+        {
+            <img src="~/images/default-avatar.png" asp-append-version="true" />
+        }
+        else
+        {
+            <img src="@Model.AvatarUrl" alt="Account avatar" style="height: 150px; width: 150px" />
+        }
+        <form asp-controller="Account" asp-action="MyAccount" method="post" class="form-group">
+            <label asp-for="AvatarUrl" class="text-white">Enter desired avatar url:</label>
+            <input asp-for="AvatarUrl" class="form-control col-md-9" style="padding:1%" />
+            <br />
+            <button type="submit" class="btn" style="padding:2px">Update</button>
+        </form>
+        <p class="text-white col-md-10"><i>Image size will be forced to 150 by 150 pixels.</i></p>
+    </div>
+    <div class="col-md-6 text-white" style="padding:2%">
+        <h4>Username:</h4>
+        <p>@Model.Username</p>
+        <h4>Email:</h4>
+        <p>@Model.Email</p>
+        <h4>Roles:</h4>
+        <p>@string.Join(", ", Model.Roles)</p>
+    </div>
+</div>

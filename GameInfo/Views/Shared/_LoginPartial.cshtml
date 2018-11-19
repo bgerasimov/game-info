@@ -6,6 +6,9 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Account" asp-action="MyAccount">My Account</a>
+    </li>
     <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
         <li class="nav-item">
             <a class="nav-link" href="javascript:{}" onclick="document.getElementById('logoutForm').submit();">Logout</a>

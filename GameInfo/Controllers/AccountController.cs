@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameInfo.Models;
 using GameInfo.Models.InputModels;
+using GameInfo.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,50 @@ namespace GameInfo.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
+        public async Task<IActionResult> MyAccount()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                var accountViewModel = new AccountViewModel
+                {
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Roles = await _userManager.GetRolesAsync(user),
+                    AvatarUrl = user.AvatarUrl
+                };
+
+                return View(accountViewModel);
+            }
+
+            return Redirect("/Account/Login");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MyAccount(AccountViewModel accountModel)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                if (accountModel.AvatarUrl != null)
+                {
+                    user.AvatarUrl = accountModel.AvatarUrl;
+                    var result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        accountModel.Username = user.UserName;
+                        accountModel.Email = user.Email;
+                        accountModel.Roles = await _userManager.GetRolesAsync(user);
+                        return View(accountModel);
+                    }
+                }
+                return View();
+            }
+
+            return Redirect("/Account/Login");
+        }
+
 
         public IActionResult Login()
         {
@@ -70,10 +115,22 @@ namespace GameInfo.Controllers
                     var result = await _userManager.CreateAsync(user, registerInputModel.Password);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        IdentityResult resultRole;
+                        if (_userManager.Users.Count() == 1)
+                        {
+                            resultRole = await _userManager.AddToRolesAsync(user, new string [] { "Admin", "User" });
+                        }
+                        else
+                        {
+                            resultRole = await _userManager.AddToRoleAsync(user, "User");
+                        }
+                        if (resultRole.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }                        
                     }
-                }                
-            }            
+                }
+            }
             return View(registerInputModel);
         }
 
