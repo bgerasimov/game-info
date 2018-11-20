@@ -1,6 +1,6 @@
 using System;
 
-namespace GameInfo.Models
+namespace GameInfo.Models.ViewModels
 {
     public class ErrorViewModel
     {

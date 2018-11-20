@@ -13,6 +13,8 @@ using GameInfo.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using GameInfo.Models;
+using GameInfo.Services;
+using GameInfo.Services.Contracts;
 
 namespace GameInfo
 {
@@ -43,6 +45,8 @@ namespace GameInfo
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<GameInfoContext>();
+
+            services.AddScoped<IGuidesService, GuidesService>();
 
             services.ConfigureApplicationCookie(options =>
             {

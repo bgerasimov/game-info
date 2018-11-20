@@ -1,0 +1,29 @@
+﻿@model List<GameInfo.Models.ViewModels.GuidesAllViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="container-fluid" style="border: solid 2px white; border-radius: 10px; padding: 6px">
+    @if (Model.Count() < 1)
+    {
+        <h4 class="text-white">No guides have been added yet.</h4>
+        <hr style="background-color: white"/>
+        <form asp-controller="Guides" asp-action="Add" method="post">
+            <button type="submit" class="btn">Add a guide</button>
+        </form>
+    }
+    @foreach (var guide in Model)
+    {
+        <div class="row" style="padding: 4px 12px 4px 12px">
+            <div class="col-md-3 text-white">
+                <p>@guide.UserName</p>
+                <img src="@guide.UserAvatar" alt="Account avatar" style="height: 50px; width: 50px" />
+            </div>
+            <div class="col-md-9">
+                <h5 class="text-white">@guide.GuideTitle</h5>
+                <p>@guide.ShortContent</p>
+            </div>
+        </div>
+    }
+</div>
+<br />
