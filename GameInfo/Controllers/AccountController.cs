@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using GameInfo.Models;
 using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameInfo.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private const string LoginErrorMessage = "Username or password not found.";
@@ -65,13 +67,14 @@ namespace GameInfo.Controllers
             return Redirect("/Account/Login");
         }
 
-
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginInputModel loginInputModel)
         {
             if (!ModelState.IsValid)
@@ -94,6 +97,7 @@ namespace GameInfo.Controllers
             return View(loginInputModel);
         }
 
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
@@ -101,6 +105,7 @@ namespace GameInfo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterInputModel registerInputModel)
         {
             if (ModelState.IsValid)

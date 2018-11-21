@@ -1,4 +1,5 @@
 ﻿using GameInfo.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,12 @@ namespace GameInfo.Controllers
             var model = _guidesService.All().ToList();
 
             return View(model);
+        }
+
+        [Authorize]
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }
