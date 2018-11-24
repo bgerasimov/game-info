@@ -24,15 +24,24 @@
                 <div class="col-md-9">
                     <h5 class="text-white">@guide.GuideTitle</h5>
                     <p>@guide.ShortContent</p>
-                    <a asp-controller="Guide" asp-action="Details" asp-route-id="@guide.Id" style="color:white">See details</a>
+                    <a asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id" style="color:white">See details</a>
                 </div>
             </div>
             <hr style="background-color: white" />
         }
-        <hr style="background-color: white"/>
-        <form asp-controller="Guides" asp-action="Add" method="get">
-            <button type="submit" class="btn">Add a guide</button>
-        </form>
+        <hr style="background-color: white" />
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-controller="Guides" asp-action="Add" method="get">
+                    <button type="submit" class="btn">Add a guide</button>
+                </form>
+            </div>
+            <div class="col-md-6 text-right">
+                <form asp-controller="Home" asp-action="Index" method="get">
+                    <button type="submit" class="btn">Back to Index</button>
+                </form>
+            </div>            
+        </div>        
     }
 </div>
 <br />
