@@ -15,6 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using GameInfo.Models;
 using GameInfo.Services;
 using GameInfo.Services.Contracts;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 namespace GameInfo
 {
@@ -50,8 +53,8 @@ namespace GameInfo
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/Account/Login";
-                options.LogoutPath = $"/Account/Logout";
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
             });
 
             services.Configure<IdentityOptions>(options =>
@@ -65,6 +68,11 @@ namespace GameInfo
 
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.SignIn.RequireConfirmedEmail = false;
+            });
+
+            services.AddMvc(options =>
+            {                
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

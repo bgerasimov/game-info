@@ -7,6 +7,8 @@ namespace GameInfo.Models.ViewModels
 {
     public class GuidesAllViewModel
     {
+        public int Id { get; set; }
+
         public string UserName { get; set; }
 
         public string UserAvatar { get; set; }

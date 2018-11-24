@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GameInfo.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private const string LoginErrorMessage = "Username or password not found.";
@@ -42,8 +41,9 @@ namespace GameInfo.Controllers
 
             return Redirect("/Account/Login");
         }
-
+        
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> MyAccount(AccountViewModel accountModel)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -66,15 +66,13 @@ namespace GameInfo.Controllers
 
             return Redirect("/Account/Login");
         }
-
-        [AllowAnonymous]
+        
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginInputModel loginInputModel)
         {
             if (!ModelState.IsValid)
@@ -96,8 +94,7 @@ namespace GameInfo.Controllers
             ModelState.AddModelError("", LoginErrorMessage);
             return View(loginInputModel);
         }
-
-        [AllowAnonymous]
+        
         public IActionResult Register()
         {
             return View();
@@ -105,7 +102,6 @@ namespace GameInfo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterInputModel registerInputModel)
         {
             if (ModelState.IsValid)

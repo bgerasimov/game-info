@@ -14,5 +14,6 @@ namespace GameInfo.Models
         public string Content { get; set; }
 
         public GameInfoUser Creator { get; set; }
+        public string CreatorId { get; set; }
     }
 }
