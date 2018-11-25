@@ -28,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-                @await  Html.PartialAsync("_LoginPartial")
+                @await Html.PartialAsync("_LoginPartial")
                 <!--
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -49,13 +49,15 @@
     <div class="container-fluid">
         @{ var linkItems = new string[] { "Guides", "Items", "NPCs", "Races", "Professions", "Quests", "Dungeons", "Achievements" };}
 
-        <div class="container col-md-11 center-block" style="padding-top:20px; padding-bottom: 40px;">
+        <div class="container col-lg-11 center-block" style="padding-top:20px; padding-bottom: 40px;">
             <div class="container-fluid" style="background-color:black; border-radius: 12px">
                 <div class="row text-center" style="float:none; padding-top:12px; border-radius: 12px">
                     @for (int i = 0; i < linkItems.Length; i++)
                     {
-                        <div class="col-md-1">
-                            <p><a asp-controller="@linkItems[i]" asp-action="Index" style="color:white">@linkItems[i]</a></p>
+                        <div class="col-lg-1 text-center" style="margin-left: 10px; margin-right: 10px">
+                            <p>
+                                <a asp-controller="@linkItems[i]" asp-action="Index" style="color:white">@linkItems[i]</a>
+                            </p>
                         </div>
                     }
                 </div>
@@ -63,6 +65,7 @@
                 @RenderBody()
             </div>
         </div>
+
     </div>
     <div class="text-center">
         <footer class="text-white" style="padding-bottom:6px;">

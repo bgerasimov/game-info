@@ -17,22 +17,20 @@ else
     </div>
     foreach (var guide in Model.OrderByDescending(x => x.Id).Take(5))
     {
-    <div class="row text-left" style="float:none; padding:12px;">
-        <div class="col-md-1">
-            <img src="@guide.UserAvatar" alt="Account avatar" style="height: 50px; width: 50px; margin-left: 14px; margin-bottom: 6px" />
-            <hr style="background-color: lightgray" />
+    <div class="row text-left" style="float:none; padding:12px; margin-left:10px; margin-right:10px; border-left: 1px solid lightgray; border-bottom: 1px solid lightgray; border-radius: 6px">
+        <div class="col-lg-1">
+            <img src="@guide.UserAvatar" alt="Account avatar" style="height: 50px; width: 50px; margin-left: 12px; margin-bottom: 6px" />
         </div>
-        <div class="col-md-9 text-white">
+        <div class="col-lg-9 text-white">
             <h5><i>Title: </i>@guide.GuideTitle</h5>
             <i style="color: darkgray">by @guide.UserName</i>
-            <hr style="background-color: lightgray" />
         </div>
-        <div class="col-md-2" style="margin-top: 10px; padding: 0">
+        <div class="col-lg-2" style="margin-top: 10px; padding: 0">
             <form asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id" method="get" style="margin-left: 30px">
                 <button type="submit" class="btn">View Details</button>
             </form>
-            <hr style="background-color: lightgray; margin-top: 23px" />
         </div>
     </div>
     }
+    <br />
 }
