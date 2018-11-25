@@ -2,6 +2,7 @@
 using GameInfo.Models;
 using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
+using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,14 +18,17 @@ namespace GameInfo.Controllers
     public class GuidesController : Controller
     {
         private readonly IGuidesService _guidesService;
+        private readonly AuthorizerService _authorizerService;
         private readonly UserManager<GameInfoUser> _userManager;
         private readonly GameInfoContext _db;
 
-        public GuidesController(IGuidesService guidesService, UserManager<GameInfoUser> userManager, GameInfoContext db)
+        public GuidesController(IGuidesService guidesService, GameInfoContext db, 
+            AuthorizerService authorizerService, UserManager<GameInfoUser> userManager)
         {
-            _guidesService = guidesService;
-            _userManager = userManager;
+            _guidesService = guidesService;            
             _db = db;
+            _authorizerService = authorizerService;
+            _userManager = userManager;
         }
 
         
@@ -35,9 +39,10 @@ namespace GameInfo.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = _authorizerService.Authorize(HttpContext);
+
             if (user != null)
             {
                 return View();

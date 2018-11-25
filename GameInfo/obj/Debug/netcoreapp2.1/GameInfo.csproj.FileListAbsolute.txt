@@ -38,3 +38,4 @@ C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Vie
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Guides\Add.g.cshtml.cs
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Guides\Details.g.cshtml.cs
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Guides\DeleteSuccess.g.cshtml.cs
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Items\Index.g.cshtml.cs

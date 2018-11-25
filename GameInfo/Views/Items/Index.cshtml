@@ -1,0 +1,43 @@
+﻿@model List<GameInfo.Models.ViewModels.ItemsAllViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container-fluid" style="border: solid 1px white; border-radius: 10px; padding: 6px">
+    @if (Model == null)
+    {
+        <h4 class="text-white text-center">No items have been added yet.</h4>
+        <hr style="background-color: white" />
+        <form class="text-center" asp-controller="Items" asp-action="Add" method="get">
+            <button type="submit" class="btn">Add an item</button>
+        </form>
+    }
+    else
+    {
+        <div class="row" style="padding: 4px 12px 4px 12px">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4">
+                    <p class="text-white">
+                        <b class="text-left">@item.Name</b>
+                        <a class="text-right" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color:white">See details</a>
+                    </p>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <form asp-controller="Items" asp-action="Add" method="get">
+                    <button type="submit" class="btn">Add an item</button>
+                </form>
+            </div>
+            <div class="col-6 text-right">
+                <form asp-controller="Home" asp-action="Index" method="get">
+                    <button type="submit" class="btn">Back to Index</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+<br />

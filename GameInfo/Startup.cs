@@ -18,6 +18,7 @@ using GameInfo.Services.Contracts;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
+using GameInfo.Services.Authorization;
 
 namespace GameInfo
 {
@@ -50,6 +51,7 @@ namespace GameInfo
                 .AddEntityFrameworkStores<GameInfoContext>();
 
             services.AddScoped<IGuidesService, GuidesService>();
+            services.AddScoped<AuthorizerService>();
 
             services.ConfigureApplicationCookie(options =>
             {
