@@ -1,5 +1,38 @@
-﻿<div class="row text-center" style="float:none; padding:12px;">
-    <div class="col-md-11">
-        <h3 class="text-white">No guides available.</h3>
+﻿@model List<GameInfo.Models.ViewModels.GuidesAllViewModel>
+
+@if (Model.Count == 0)
+{
+    <div class="row text-center" style="float:none; padding:12px;">
+        <div class="col-md-12">
+            <h3 class="text-white">No guides available.</h3>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="row text-center" style="float:none; padding:12px;">
+        <div class="col-md-12">
+            <h3 class="text-white">Most recent guides:</h3>
+        </div>
+    </div>
+    foreach (var guide in Model.OrderByDescending(x => x.Id).Take(5))
+    {
+    <div class="row text-left" style="float:none; padding:12px;">
+        <div class="col-md-1">
+            <img src="@guide.UserAvatar" alt="Account avatar" style="height: 50px; width: 50px; margin-left: 14px; margin-bottom: 6px" />
+            <hr style="background-color: lightgray" />
+        </div>
+        <div class="col-md-9 text-white">
+            <h5><i>Title: </i>@guide.GuideTitle</h5>
+            <i style="color: darkgray">by @guide.UserName</i>
+            <hr style="background-color: lightgray" />
+        </div>
+        <div class="col-md-2" style="margin-top: 10px; padding: 0">
+            <form asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id" method="get" style="margin-left: 30px">
+                <button type="submit" class="btn">View Details</button>
+            </form>
+            <hr style="background-color: lightgray; margin-top: 23px" />
+        </div>
+    </div>
+    }
+}

@@ -108,7 +108,7 @@ WriteAttributeValue("", 426, Model.UserAvatar, 426, 17, false);
             WriteLiteral("</p>\r\n        </div>\r\n    </div>\r\n    <hr style=\"background-color: white;\"/>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6\">\r\n            ");
             EndContext();
             BeginContext(849, 162, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1864bbc15ba5493ab0ca342ae639affa", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ced2888c36d54d5c9d4b2aae44c75831", async() => {
                 BeginContext(911, 93, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"btn\">Back to all guides</button>\r\n            ");
                 EndContext();
@@ -145,7 +145,7 @@ WriteAttributeValue("", 426, Model.UserAvatar, 426, 17, false);
             WriteLiteral("        <div class=\"col-md-6 text-right\">\r\n            ");
             EndContext();
             BeginContext(1133, 169, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac87bbe83a7d41e59ed36629cf12809b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "950aada7673544e28af69b7dfa6a9a56", async() => {
                 BeginContext(1208, 87, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"btn\">Delete guide</button>\r\n            ");
                 EndContext();

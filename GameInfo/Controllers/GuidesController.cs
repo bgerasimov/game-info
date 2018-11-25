@@ -95,6 +95,7 @@ namespace GameInfo.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var guide = _db.Guides.FirstOrDefault(x => x.Id == id);
