@@ -51,6 +51,7 @@ namespace GameInfo
                 .AddEntityFrameworkStores<GameInfoContext>();
 
             services.AddScoped<IGuidesService, GuidesService>();
+            services.AddScoped<IItemsService, ItemsService>();
             services.AddScoped<AuthorizerService>();
 
             services.ConfigureApplicationCookie(options =>

@@ -16,16 +16,31 @@
     else
     {
         <div class="row" style="padding: 4px 12px 4px 12px">
-            @foreach (var item in Model)
+            @{ var counter = 2; }
+            @foreach (var item in Model.OrderByDescending(x => x.Id))
             {
-                <div class="col-lg-4">
-                    <p class="text-white">
-                        <b class="text-left">@item.Name</b>
-                        <a class="text-right" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color:white">See details</a>
-                    </p>
-                </div>
-            }
+                if (counter % 3 == 0)
+                {
+                    <div class="col-lg-4 text-center" style="border-left: solid 1px white; border-right: solid 1px white">
+                        <p class="text-white">
+                            <b style="padding-right:4%">@item.Name</b>
+                            <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color:white">See details</a>
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-4 text-center">
+                        <p class="text-white">
+                            <b style="padding-right:4%">@item.Name</b>
+                            <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color:white">See details</a>
+                        </p>
+                    </div>
+                }
+                counter++;
+           }
         </div>
+        <hr style="background-color: white" />
         <div class="row">
             <div class="col-6">
                 <form asp-controller="Items" asp-action="Add" method="get">

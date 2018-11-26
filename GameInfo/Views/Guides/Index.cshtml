@@ -15,7 +15,7 @@
     }
     else
     {
-        foreach (var guide in Model)
+        foreach (var guide in Model.OrderByDescending(x => x.Id))
         {
             <div class="row" style="padding: 4px 12px 4px 12px">
                 <div class="col-md-2 text-white">

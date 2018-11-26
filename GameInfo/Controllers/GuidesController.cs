@@ -95,7 +95,7 @@ namespace GameInfo.Controllers
             model.Content = string.Join(
                 "<br/>", guide.Content.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                 .Select(x => HttpUtility.HtmlEncode(x)));
-
+            
             return View(model);
         }
 

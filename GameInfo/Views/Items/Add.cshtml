@@ -1,0 +1,37 @@
+﻿@model GameInfo.Models.InputModels.AddItemInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row container-fluid text-white" style="padding: 6px 30px 6px 30px;">
+    <h2>Add an item</h2>
+</div>
+<div class="row text-white">
+    <form class="col-md-12" method="post" asp-controller="Items" asp-action="Add">
+        <div class="form-group col-md-4">
+            <label asp-for="Name">Item Name:</label>
+            <input asp-for="Name" class="form-control" placeholder="Item name...">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="AcquiredFrom">Acquired From:</label>
+            <input asp-for="AcquiredFrom" class="form-control" placeholder="Acquisition...">
+            <span asp-validation-for="AcquiredFrom" class="text-danger"></span>
+        </div>
+        @{ var usageTypes = new string[] { "None", "Weapon", "Armor", "Consumable" }; }
+        <div class="form-group col-md-4">
+            <label asp-for="Usage">Usage:</label>
+            <p>
+                <select asp-for="Usage" asp-items="@(new SelectList(usageTypes))">Usage</select>
+            </p>
+        </div>
+        <div class="form-group col-md-4 button-holder text-left">
+            <button type="submit" class="btn">Add Item</button>
+        </div>
+    </form>
+    <div class="form-group col-md-12" style="padding-left: 30px">
+        <form asp-controller="Items" asp-action="Index">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+</div>
