@@ -1,0 +1,48 @@
+﻿@model GameInfo.Models.Item
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<GameInfoUser> SignInManager
+
+<div class="row text-white" style="padding-left: 4%; padding-top: 4%; margin-right: 1%">
+    <div class="col-lg-2" style="border-right: 1px solid white; border-bottom: 1px solid white; padding-top: 6px">
+        <h3>Name:</h3>
+    </div>
+    <div class="col-lg-10" style="border-bottom: 1px solid white; padding-top: 6px">
+        <h3>@Model.Name</h3>
+    </div>
+</div>
+<div class="row text-white" style="padding-left: 4%; margin-right: 1%">
+    <div class="col-lg-2" style="border-right: 1px solid white; border-bottom: 1px solid white; padding-top: 6px">
+        <h4>Acquisition:</h4>
+    </div>
+    <div class="col-lg-10" style="border-bottom: 1px solid white; padding-top: 6px">
+        <h4>@Model.AcquiredFrom</h4>
+    </div>
+</div>
+<div class="row text-white" style="padding-left: 4%; margin-right: 1%">
+    <div class="col-lg-2" style="border-right: 1px solid white; border-bottom: 1px solid white; padding-top: 6px">
+        <h4>Usage:</h4>
+    </div>
+    <div class="col-lg-10" style="border-bottom: 1px solid white; padding-top: 6px">
+        <h4 style="padding-bottom: 1%">@Model.Usage</h4>
+    </div>
+</div>
+<div class="col-lg-12 text-center">
+    <form asp-controller="Items" asp-action="Index" method="get" style="padding-top: 2%">
+        <button type="submit" class="btn">Back to all items</button>
+    </form>
+</div>
+<br />
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div class="col-lg-12 text-center">
+        <form asp-controller="Items" asp-action="Delete" asp-route-id="@Model.Id">
+            <button type="submit" class="btn">Delete item</button>
+        </form>
+    </div>
+    <br />
+}

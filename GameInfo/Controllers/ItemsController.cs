@@ -7,6 +7,7 @@ using GameInfo.Models;
 using GameInfo.Models.InputModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameInfo.Controllers
@@ -63,6 +64,38 @@ namespace GameInfo.Controllers
             this._db.SaveChanges();
         
             return Redirect("/Items");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var item = _db.Items.FirstOrDefault(x => x.Id == id);
+
+            if (item == null)
+            {
+                return Redirect("/Items");
+            }
+
+            return View(item);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = _db.Items.FirstOrDefault(x => x.Id == id);
+            if (item != null)
+            {
+                _db.Items.Remove(item);
+                await _db.SaveChangesAsync();
+                return Redirect("/Items/DeleteSuccess");
+            }
+
+            return Redirect("/Items/Index");
+        }
+
+        public IActionResult DeleteSuccess()
+        {
+            return View();
         }
     }
 }

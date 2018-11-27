@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" style="padding: 6px 6px 20px 6px">
+    <div class="row text-white" style="padding: 4px 12px 4px 12px">
+        <div class="col-md-12 text-center">
+            <h5>Successfully deleted item.</h5>
+            <form asp-controller="Items" asp-action="Index">
+                <button type="submit" class="btn">Back to all</button>
+            </form>
+        </div>
+    </div>
+</div>

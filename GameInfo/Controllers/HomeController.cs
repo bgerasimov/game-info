@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using GameInfo.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Data;
 
 namespace GameInfo.Controllers
 {
