@@ -1,4 +1,6 @@
 ﻿using GameInfo.Data;
+using GameInfo.Models;
+using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Contracts;
 using System;
@@ -15,6 +17,17 @@ namespace GameInfo.Services
         public NPCsService(GameInfoContext db)
         {
             _db = db;
+        }
+
+        public void Add(AddNPCInputModel model)
+        {
+            var npc = new NPC
+            {
+                Name = model.Name
+            };
+
+            this._db.NPCs.Add(npc);
+            this._db.SaveChanges();
         }
 
         public IList<NPCsAllViewModel> All()

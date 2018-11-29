@@ -130,7 +130,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
             WriteLiteral("</h4>\r\n    </div>\r\n</div>\r\n<div class=\"col-lg-12 text-center\">\r\n    ");
             EndContext();
             BeginContext(1419, 168, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "002ac92e19db4760aa6d1d1e6f6d3930", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "60d58dfa5c114821aab56b15746984bd", async() => {
                 BeginContext(1504, 76, true);
                 WriteLiteral("\r\n        <button type=\"submit\" class=\"btn\">Back to all items</button>\r\n    ");
                 EndContext();
@@ -168,7 +168,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
             WriteLiteral("    <div class=\"col-lg-12 text-center\">\r\n        ");
             EndContext();
             BeginContext(1721, 159, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7e76c4f8dc0544c3894685aa84404fbf", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a1ec32af1fb42e3a2a4cd0e802a6a20", async() => {
                 BeginContext(1795, 78, true);
                 WriteLiteral("\r\n            <button type=\"submit\" class=\"btn\">Delete item</button>\r\n        ");
                 EndContext();

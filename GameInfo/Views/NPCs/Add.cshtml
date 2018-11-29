@@ -1,0 +1,25 @@
+﻿@model GameInfo.Models.InputModels.AddNPCInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row container-fluid text-white" style="padding: 6px 30px 6px 30px;">
+    <h2>Add a NPC</h2>
+</div>
+<div class="row text-white">
+    <form class="col-md-12" method="post" asp-controller="NPCs" asp-action="Add">
+        <div class="form-group col-md-4">
+            <label asp-for="Name">NPC Name:</label>
+            <input asp-for="Name" class="form-control" placeholder="NPC name...">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4 button-holder text-left">
+            <button type="submit" class="btn">Add NPC</button>
+        </div>
+    </form>
+    <div class="form-group col-md-12" style="padding-left: 30px">
+        <form asp-controller="NPCs" asp-action="Index">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+</div>
