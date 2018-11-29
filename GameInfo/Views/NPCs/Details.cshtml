@@ -1,0 +1,75 @@
+﻿@model GameInfo.Models.NPC
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<GameInfoUser> SignInManager
+
+<div class="row text-white" style="padding-left: 4%; padding-top: 4%; margin-left: 1%; margin-right: 1%; border-bottom: solid 1px white">
+    <div class="col-lg-7" style="border-right: solid 1px white">
+        <h3>Name: <i>@Model.Name</i></h3>
+    </div>
+    <div class="col-lg-5">
+        <h3 style="border-bottom: solid 1px white">Quests offered:</h3>
+        @if (Model.Quests.Count != 0)
+        {
+            foreach (var quest in Model.Quests)
+            {
+                <p>
+                    <a asp-controller="Quests" asp-action="Details" asp-route-id="@quest.Id" style="color: white">@quest.Title</a>
+                </p>
+            }
+        }
+        else
+        {
+            <h5>No quests have been added to this NPC.</h5>
+        }
+    </div>
+</div>
+<div class="row text-white" style="padding-left: 4%; padding-top: 2%; padding-bottom: 3%; margin-right: 1%;">
+    <div class="col-lg-12">
+        <h3>Droppable loot:</h3>
+        <hr style="background-color: white" />
+        @if (Model.Loot.Count != 0)
+        {
+            foreach (var item in Model.Loot)
+            {
+                <h5 style="border-bottom: solid 1px white">
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color: white">@item.Name</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No items have been added to this NPC.</h5>
+        }
+    </div>
+</div>
+<div class="row" style="padding-bottom: 2%; padding-top: 1%; margin-left:1%; margin-right: 1%; border-top: solid 1px white">
+    <div class="col-md-2">
+        <form asp-controller="NPCs" asp-action="AddQuest" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn">Add quest</button>
+        </form>
+    </div>
+    <div class="col-md-2">
+        <form asp-controller="NPCs" asp-action="AddItem" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn">Add item</button>
+        </form>
+    </div>
+    <div class="col-md-6 text-right">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <form asp-controller="NPCs" asp-action="Delete" asp-route-id="@Model.Id">
+                <button type="submit" class="btn">Delete NPC</button>
+            </form>
+        }
+    </div>
+    <div class="col-md-2 text-right">
+        <form asp-controller="NPCs" asp-action="Index" method="get">
+            <button type="submit" class="btn">Back to all NPCs</button>
+        </form>
+    </div>
+</div>

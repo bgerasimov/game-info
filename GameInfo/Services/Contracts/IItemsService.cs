@@ -16,6 +16,8 @@ namespace GameInfo.Services.Contracts
 
         Item ById(int id);
 
+        Item ByName(string name);
+
         bool Delete(int id);
     }
 }

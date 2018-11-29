@@ -10,7 +10,7 @@ namespace GameInfo.Models
     {
         public Profession()
         {
-            this.Races = new HashSet<RaceProfession>();
+            this.Races = new List<RaceProfession>();
         }
 
         public int Id { get; set; }
@@ -23,6 +23,6 @@ namespace GameInfo.Models
 
         public ClassRole ClassRole { get; set; }
 
-        public virtual ICollection<RaceProfession> Races { get; set; }
+        public virtual List<RaceProfession> Races { get; set; }
     }
 }

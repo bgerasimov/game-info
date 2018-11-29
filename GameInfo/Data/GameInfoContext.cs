@@ -28,7 +28,15 @@ namespace GameInfo.Data
         {
             builder.Entity<RaceProfession>()
                 .HasKey(rp => new { rp.RaceId, rp.ProfessionId });
-            base.OnModelCreating(builder);            
+            builder.Entity<NPC>()
+                .HasMany(x => x.Loot)
+                .WithOne(x => x.NPC)
+                .HasForeignKey(x => x.NPCId);
+            builder.Entity<NPC>()
+                .HasMany(x => x.Quests)
+                .WithOne(x => x.QuestGiver)
+                .HasForeignKey(x => x.QuestGiverId);
+            base.OnModelCreating(builder);
         }
     }
 }

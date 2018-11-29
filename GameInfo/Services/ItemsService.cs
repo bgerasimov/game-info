@@ -52,6 +52,13 @@ namespace GameInfo.Services
             return item;
         }
 
+        public Item ByName(string name)
+        {
+            var item = _db.Items.FirstOrDefault(x => x.Name == name);
+
+            return item;
+        }
+
         public bool Delete(int id)
         {
             var item = this.ById(id);

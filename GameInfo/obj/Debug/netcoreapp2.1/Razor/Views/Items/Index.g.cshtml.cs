@@ -116,7 +116,7 @@ using GameInfo.Models;
             WriteLiteral("</b>\r\n                            ");
             EndContext();
             BeginContext(804, 106, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cfe971b5dea84f0da2ec7353bacd2208", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "538fda885ce64700b59ca94869703be4", async() => {
                 BeginContext(895, 11, true);
                 WriteLiteral("See details");
                 EndContext();
@@ -174,7 +174,7 @@ using GameInfo.Models;
             WriteLiteral("</b>\r\n                            ");
             EndContext();
             BeginContext(1272, 106, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "71ffac365b3e4e9fb78863a8c8d07866", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "131135a1d1e04c50a94f8d7bf6a8d9d1", async() => {
                 BeginContext(1363, 11, true);
                 WriteLiteral("See details");
                 EndContext();
@@ -230,7 +230,7 @@ using GameInfo.Models;
             WriteLiteral("    <hr style=\"background-color: white\" />\r\n    <div class=\"row\">\r\n        <div class=\"col-6\">\r\n            ");
             EndContext();
             BeginContext(1631, 152, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "274a06e996db4265952b6b2c511ad9c6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ea58f361d9904db8b858b8b4fda24ed3", async() => {
                 BeginContext(1690, 86, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"btn\">Add an item</button>\r\n            ");
                 EndContext();
@@ -258,7 +258,7 @@ using GameInfo.Models;
             WriteLiteral("\r\n        </div>\r\n        <div class=\"col-6 text-right\">\r\n            ");
             EndContext();
             BeginContext(1853, 155, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bd1cc0d8a0da452e9fd7283cfea8e7fe", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "44655fce021d4ad38842855197313fe0", async() => {
                 BeginContext(1913, 88, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"btn\">Back to Index</button>\r\n            ");
                 EndContext();

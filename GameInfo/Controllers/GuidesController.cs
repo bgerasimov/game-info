@@ -36,9 +36,9 @@ namespace GameInfo.Controllers
             return View(model);
         }
 
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            var user = _authorizerService.Authorize(HttpContext);
+            var user = await _authorizerService.Authorize(HttpContext);
 
             if (user != null)
             {
@@ -107,7 +107,7 @@ namespace GameInfo.Controllers
             
             return Redirect("/Guides/Index");
         }
-        
+
         public IActionResult DeleteSuccess()
         {
             return View();

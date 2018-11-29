@@ -8,6 +8,14 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20181124030417_InitialCreate.cs" />
     <Compile Remove="Data\Migrations\20181124030417_InitialCreate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20181129175255_fixedRelations.cs" />
+    <Compile Remove="Data\Migrations\20181129175255_fixedRelations.Designer.cs" />
+    <Compile Remove="Data\Migrations\20181129175428_FixedddRelations.cs" />
+    <Compile Remove="Data\Migrations\20181129175428_FixedddRelations.Designer.cs" />
+    <Compile Remove="Data\Migrations\20181129175445_FixedRelations.cs" />
+    <Compile Remove="Data\Migrations\20181129175445_FixedRelations.Designer.cs" />
+    <Compile Remove="Data\Migrations\20181129180151_RecreateNPCsTable.cs" />
+    <Compile Remove="Data\Migrations\20181129180151_RecreateNPCsTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

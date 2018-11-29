@@ -178,9 +178,9 @@ namespace GameInfo.Data.Migrations
                     Name = table.Column<string>(nullable: true),
                     AcquiredFrom = table.Column<string>(nullable: true),
                     Usage = table.Column<string>(nullable: true),
+                    NPCId = table.Column<int>(nullable: true),
                     AchievementId = table.Column<int>(nullable: true),
-                    DungeonId = table.Column<int>(nullable: true),
-                    NPCId = table.Column<int>(nullable: true)
+                    DungeonId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -214,7 +214,7 @@ namespace GameInfo.Data.Migrations
                     Title = table.Column<string>(nullable: true),
                     QuestText = table.Column<string>(nullable: true),
                     CompletionCondition = table.Column<string>(nullable: true),
-                    QuestGiverId = table.Column<int>(nullable: false)
+                    QuestGiverId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,7 +224,7 @@ namespace GameInfo.Data.Migrations
                         column: x => x.QuestGiverId,
                         principalTable: "NPCs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

@@ -196,7 +196,7 @@ namespace GameInfo.Data.Migrations
 
                     b.Property<string>("CompletionCondition");
 
-                    b.Property<int>("QuestGiverId");
+                    b.Property<int?>("QuestGiverId");
 
                     b.Property<string>("QuestText");
 
@@ -371,14 +371,14 @@ namespace GameInfo.Data.Migrations
                         .WithMany("Rewards")
                         .HasForeignKey("DungeonId");
 
-                    b.HasOne("GameInfo.Models.NPC")
+                    b.HasOne("GameInfo.Models.NPC", "NPC")
                         .WithMany("Loot")
                         .HasForeignKey("NPCId");
                 });
 
             modelBuilder.Entity("GameInfo.Models.NPC", b =>
                 {
-                    b.HasOne("GameInfo.Models.Dungeon")
+                    b.HasOne("GameInfo.Models.Dungeon", "Dungeon")
                         .WithMany("Bosses")
                         .HasForeignKey("DungeonId");
                 });
@@ -387,8 +387,7 @@ namespace GameInfo.Data.Migrations
                 {
                     b.HasOne("GameInfo.Models.NPC", "QuestGiver")
                         .WithMany("Quests")
-                        .HasForeignKey("QuestGiverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("QuestGiverId");
                 });
 
             modelBuilder.Entity("GameInfo.Models.RaceProfession", b =>

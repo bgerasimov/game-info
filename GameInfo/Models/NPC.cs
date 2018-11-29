@@ -9,16 +9,19 @@ namespace GameInfo.Models
     {
         public NPC()
         {
-            this.Quests = new HashSet<Quest>();
-            this.Loot = new HashSet<Item>();
+            this.Quests = new List<Quest>();
+            this.Loot = new List<Item>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public ICollection<Quest> Quests { get; set; }
+        public List<Quest> Quests { get; set; }
 
-        public ICollection<Item> Loot { get; set; }
+        public List<Item> Loot { get; set; }
+
+        public Dungeon Dungeon { get; set; }
+        public int? DungeonId { get; set; }
     }
 }

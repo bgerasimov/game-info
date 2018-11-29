@@ -9,7 +9,8 @@ namespace GameInfo.Models
     {
         public Dungeon()
         {
-            this.Rewards = new HashSet<Item>();
+            this.Bosses = new List<NPC>();
+            this.Rewards = new List<Item>();
         }
 
         public int Id { get; set; }
@@ -18,8 +19,8 @@ namespace GameInfo.Models
 
         public Achievement AchievementReward { get; set; }
 
-        public ICollection<NPC> Bosses { get; set; }
+        public List<NPC> Bosses { get; set; }
 
-        public ICollection<Item> Rewards { get; set; }
+        public List<Item> Rewards { get; set; }
     }
 }

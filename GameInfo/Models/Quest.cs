@@ -16,6 +16,6 @@ namespace GameInfo.Models
         public string CompletionCondition { get; set; }
 
         public NPC QuestGiver { get; set; }
-        public int QuestGiverId { get; set; }
+        public int? QuestGiverId { get; set; }
     }
 }

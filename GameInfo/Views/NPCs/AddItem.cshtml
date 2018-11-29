@@ -1,0 +1,29 @@
+﻿@model GameInfo.Models.InputModels.AddItemToNPCInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row text-center text-white">
+    <div class="form-group col-lg-12">
+        <h4>Adding item to: <i>@Model.NPCName</i></h4>
+        <form asp-controller="NPCs" asp-action="AddItem" method="post">
+
+            <input type="hidden" asp-for="@Model.NPCId" />
+
+            <label asp-for="ItemName">Items:</label>
+            <p>
+                <select asp-for="ItemName" asp-items="@(new SelectList(Model.Items.Select(x => x.Name).ToList()))">Items</select>
+            </p>
+            <button type="submit" class="btn">Add item to NPC</button>
+        </form>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-12">
+        <form asp-controller="NPCs" asp-action="Details" asp-route-id="@Model.NPCId">
+            <button type="submit" class="btn">Back to NPC</button>
+        </form>
+    </div>
+</div>
+<br />

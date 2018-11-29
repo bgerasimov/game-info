@@ -9,7 +9,7 @@ namespace GameInfo.Models
     {
         public Achievement()
         {
-            this.Rewards = new HashSet<Item>();
+            this.Rewards = new List<Item>();
         }
 
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace GameInfo.Models
 
         public string AcquisitionConditions { get; set; }
 
-        public ICollection<Item> Rewards { get; set; }
+        public List<Item> Rewards { get; set; }
     }
 }

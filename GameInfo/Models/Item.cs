@@ -14,5 +14,8 @@ namespace GameInfo.Models
         public string AcquiredFrom { get; set; }
 
         public string Usage { get; set; }
+
+        public NPC NPC { get; set; }
+        public int? NPCId { get; set; }
     }
 }

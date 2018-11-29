@@ -44,3 +44,6 @@ C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Vie
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\Items\DeleteSuccess.g.cshtml.cs
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\NPCs\Index.g.cshtml.cs
 C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\NPCs\Add.g.cshtml.cs
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\NPCs\Details.g.cshtml.cs
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\NPCs\DeleteSuccess.g.cshtml.cs
+C:\Users\killme\source\repos\GameInfo\GameInfo\obj\Debug\netcoreapp2.1\Razor\Views\NPCs\AddItem.g.cshtml.cs
