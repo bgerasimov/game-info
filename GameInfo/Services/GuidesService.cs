@@ -1,5 +1,6 @@
 ﻿using GameInfo.Data;
 using GameInfo.Models;
+using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,19 @@ namespace GameInfo.Services
         public GuidesService(GameInfoContext db)
         {
             _db = db;
+        }
+
+        public void Add(AddGuideInputModel model, GameInfoUser currentUser)
+        {
+            var guide = new Guide
+            {
+                Title = model.GuideTitle,
+                Content = model.GuideContent
+            };            
+            guide.Creator = currentUser;
+
+            this._db.Guides.Add(guide);
+            this._db.SaveChanges();
         }
 
         public IList<GuidesAllViewModel> All()
@@ -50,6 +64,31 @@ namespace GameInfo.Services
             {
                 return null;
             }            
+        }
+
+        public Guide ById(int id)
+        {
+            var guide = _db.Guides.FirstOrDefault(x => x.Id == id);
+            if (guide != null)
+            {
+                guide.Creator = _db.Users.FirstOrDefault(x => x.Id == guide.CreatorId);
+            }            
+
+            return guide;
+        }
+
+        public bool Delete(int id)
+        {
+            var guide = this.ById(id);
+
+            if (guide != null)
+            {
+                _db.Guides.Remove(guide);
+                _db.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

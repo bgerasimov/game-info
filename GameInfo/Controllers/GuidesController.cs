@@ -20,13 +20,10 @@ namespace GameInfo.Controllers
         private readonly IGuidesService _guidesService;
         private readonly AuthorizerService _authorizerService;
         private readonly UserManager<GameInfoUser> _userManager;
-        private readonly GameInfoContext _db;
 
-        public GuidesController(IGuidesService guidesService, GameInfoContext db, 
-            AuthorizerService authorizerService, UserManager<GameInfoUser> userManager)
+        public GuidesController(IGuidesService guidesService, AuthorizerService authorizerService, UserManager<GameInfoUser> userManager)
         {
-            _guidesService = guidesService;            
-            _db = db;
+            _guidesService = guidesService;
             _authorizerService = authorizerService;
             _userManager = userManager;
         }
@@ -55,29 +52,22 @@ namespace GameInfo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddGuideInputModel inputModel)
         {
-            if (inputModel.GuideContent.Contains('<') || inputModel.GuideContent.Contains('>'))
+            if (inputModel.GuideContent.Contains('<') 
+                || inputModel.GuideContent.Contains('>')
+                || !ModelState.IsValid)
             {
                 return View();
             }
 
-            var guide = new Guide
-            {
-                Title = inputModel.GuideTitle,
-                Content = inputModel.GuideContent                
-            };
             var currentUser = await _userManager.GetUserAsync(User);
-            guide.Creator = currentUser;
-
-            this._db.Guides.Add(guide);
-            this._db.SaveChanges();
+            _guidesService.Add(inputModel, currentUser);
 
             return Redirect("/Guides");
         }
 
         public IActionResult Details(int id)
         {
-            var guide = _db.Guides.FirstOrDefault(x => x.Id == id);
-            guide.Creator = _db.Users.FirstOrDefault(x => x.Id == guide.CreatorId);
+            var guide = _guidesService.ById(id);
 
             if (guide == null)
             {
@@ -92,22 +82,26 @@ namespace GameInfo.Controllers
                 UserAvatar = guide.Creator.AvatarUrl
             };
 
+            FormatContent(guide, model);
+
+            return View(model);
+        }
+
+        private static void FormatContent(Guide guide, GuideDetailsViewModel model)
+        {
             model.Content = string.Join(
                 "<br/>", guide.Content.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                 .Select(x => HttpUtility.HtmlEncode(x)));
-            
-            return View(model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var guide = _db.Guides.FirstOrDefault(x => x.Id == id);
-            if (guide != null)
+            var success = _guidesService.Delete(id);
+
+            if (success)
             {
-                _db.Guides.Remove(guide);
-                await _db.SaveChangesAsync();
                 return Redirect("/Guides/DeleteSuccess");
             }
             

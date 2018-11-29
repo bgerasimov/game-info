@@ -16,12 +16,10 @@ namespace GameInfo.Controllers
     {
         private readonly IItemsService _itemsService;
         private readonly AuthorizerService _authorizerService;
-        private readonly GameInfoContext _db;
 
-        public ItemsController(AuthorizerService authorizerService, GameInfoContext db, IItemsService itemsService)
+        public ItemsController(AuthorizerService authorizerService, IItemsService itemsService)
         {
             _authorizerService = authorizerService;
-            _db = db;
             _itemsService = itemsService;
         }
 
@@ -53,22 +51,14 @@ namespace GameInfo.Controllers
                 return View();
             }
 
-            var item = new Item
-            {
-                Name = inputModel.Name,
-                AcquiredFrom = inputModel.AcquiredFrom,
-                Usage = inputModel.Usage
-            };
-        
-            this._db.Items.Add(item);
-            this._db.SaveChanges();
+            _itemsService.Add(inputModel);
         
             return Redirect("/Items");
         }
 
         public IActionResult Details(int id)
         {
-            var item = _db.Items.FirstOrDefault(x => x.Id == id);
+            var item = _itemsService.ById(id);
 
             if (item == null)
             {
@@ -80,13 +70,12 @@ namespace GameInfo.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var item = _db.Items.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            var success = _itemsService.Delete(id);
+
+            if (success)
             {
-                _db.Items.Remove(item);
-                await _db.SaveChangesAsync();
                 return Redirect("/Items/DeleteSuccess");
             }
 

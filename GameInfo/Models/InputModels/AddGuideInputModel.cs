@@ -10,6 +10,7 @@ namespace GameInfo.Models.InputModels
     {
         [Required]
         [Display(Name = "Guide Title")]
+        [StringLength(50)]
         public string GuideTitle { get; set; }
 
         [Required]

@@ -1,4 +1,6 @@
-﻿using GameInfo.Models.ViewModels;
+﻿using GameInfo.Models;
+using GameInfo.Models.InputModels;
+using GameInfo.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,11 @@ namespace GameInfo.Services.Contracts
     public interface IItemsService
     {
         IList<ItemsAllViewModel> All();
+
+        void Add(AddItemInputModel model);
+
+        Item ById(int id);
+
+        bool Delete(int id);
     }
 }
