@@ -62,7 +62,7 @@ using GameInfo.Models;
             WriteLiteral("\r\n<div class=\"container-fluid\" style=\"padding: 6px 6px 20px 6px\">\r\n    <div class=\"row text-white\" style=\"padding: 4px 12px 4px 12px\">\r\n        <div class=\"col-md-12 text-center\">\r\n            <h5>Successfully deleted guide.</h5>\r\n            ");
             EndContext();
             BeginContext(297, 142, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4490817e7c92477aa8229446a7ca7a92", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8e7df68de2094f2da4781cd179520eb9", async() => {
                 BeginContext(346, 86, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"btn\">Back to all</button>\r\n            ");
                 EndContext();

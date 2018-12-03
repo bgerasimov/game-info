@@ -13,7 +13,7 @@
 
             <label asp-for="ItemName">Items:</label>
             <p>
-                <select asp-for="ItemName" asp-items="@(new SelectList(Model.Items.Select(x => x.Name).ToList()))">Items</select>
+                <select asp-for="ItemName" asp-items="@(new SelectList(Model.Items.OrderBy(x => x.Name).Select(x => x.Name).ToList()))">Items</select>
             </p>
             <button type="submit" class="btn">Add item to NPC</button>
         </form>

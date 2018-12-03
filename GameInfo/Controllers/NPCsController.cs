@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameInfo.Models;
 using GameInfo.Models.InputModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;

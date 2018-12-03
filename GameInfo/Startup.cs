@@ -53,6 +53,7 @@ namespace GameInfo
             services.AddScoped<IGuidesService, GuidesService>();
             services.AddScoped<IItemsService, ItemsService>();
             services.AddScoped<INPCsService, NPCsService>();
+            services.AddScoped<IQuestsService, QuestsService>();
             services.AddScoped<AuthorizerService>();
 
             services.ConfigureApplicationCookie(options =>

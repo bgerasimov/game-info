@@ -1,0 +1,66 @@
+﻿@model List<GameInfo.Models.ViewModels.QuestsAllViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container-fluid" style="border: solid 1px white; border-radius: 10px;">
+    @if (Model.Count == 0)
+    {
+        <h4 class="text-white text-center">No quests have been added yet.</h4>
+    }
+    else
+    {
+        <div class="row text-white" style="padding: 0px 12px 0px 12px; border-bottom: 1px solid white">
+            <div class="col-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
+                <p><b>Quest Title</b></p>
+            </div>
+            <div class="col-4 text-left" style="padding-top: 1%">
+                <p><b>Quest Giver</b></p>
+            </div>
+        </div>
+        @foreach (var quest in Model.OrderBy(x => x.QuestTitle))
+        {
+            <div class="row text-white" style="padding: 0px 12px 0px 12px; border-bottom: 1px solid gray">
+                <div class="col-lg-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
+                    <p>
+                        <a asp-controller="Quests" asp-action="Details" asp-route-id="@quest.Id" style="color:white">
+                            <i>@quest.QuestTitle</i>
+                        </a>
+                    </p>
+                </div>
+                @if (quest.QuestGiver != null)
+                {
+                <div class="col-lg-4 text-left" style="padding-top: 1%">
+                    <p>
+                        <a asp-controller="NPCs" asp-action="Details" asp-route-id="@quest.QuestGiverId" style="color:white">
+                            <i>@quest.QuestGiver</i>
+                        </a>
+                    </p>
+                </div>
+                }
+                else
+                {
+                <div class="col-lg-4 text-left" style="padding-top: 1%">
+                    <p>
+                        <i>None specified</i>
+                    </p>
+                </div>
+                }
+            </div>
+        }
+    }
+    <div class="row" style="padding-top: 2px">
+        <div class="col-6">
+            <form asp-controller="Quests" asp-action="Add" method="get">
+                <button type="submit" class="btn" style="margin: 4px">Add a new quest</button>
+            </form>
+        </div>
+        <div class="col-6 text-right">
+            <form asp-controller="Home" asp-action="Index" method="get">
+                <button type="submit" class="btn" style="margin: 4px">Back to Index</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />

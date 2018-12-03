@@ -19,8 +19,9 @@
                 {
                     <div class="col-lg-4 text-center">
                         <p class="text-white">
-                            <b style="padding-right:4%">@item.Name</b>
-                            <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color:white">See details</a>
+                            <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="padding-right:4%; color:white">
+                                <b>@item.Name</b>
+                            </a>
                         </p>
                     </div>
                 }
@@ -28,8 +29,9 @@
                 {
                     <div class="col-lg-4 text-center" style="border-right: 1px solid white">
                         <p class="text-white">
-                            <b style="padding-right:4%">@item.Name</b>
-                            <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color:white">See details</a>
+                            <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="padding-right:4%; color:white">
+                                <b>@item.Name</b>
+                            </a>
                         </p>
                     </div>
                 }

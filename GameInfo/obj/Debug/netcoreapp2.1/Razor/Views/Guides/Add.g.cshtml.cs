@@ -70,12 +70,12 @@ using GameInfo.Models;
             WriteLiteral("<div class=\"row container-fluid text-white\" style=\"padding: 6px 30px 6px 30px;\">\r\n    <h2>Add a guide</h2>\r\n</div>\r\n<div class=\"row text-white\">\r\n    <div class=\"col-lg-10\">\r\n        ");
             EndContext();
             BeginContext(292, 1079, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "10444b394205430aa209658f73f0f7ac", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a2fdd03f0494bf3b1a974f6eaa617d7", async() => {
                 BeginContext(353, 65, true);
                 WriteLiteral("\r\n            <div class=\"form-group col-md-4\">\r\n                ");
                 EndContext();
                 BeginContext(418, 47, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("label", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "895b11858428474d8aa736b27918027c", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("label", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ff2ab0233aca4fdaa04089cea0cfffad", async() => {
                     BeginContext(446, 11, true);
                     WriteLiteral("Guide Title");
                     EndContext();
@@ -101,7 +101,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_LabelTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(483, 78, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "e060bf7ffcb14adfa4fa6f85ad624c4b", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "a05e9fdb6a344d22bee0c5764930e792", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -126,7 +126,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(579, 65, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ce44e57c4ab4df38e32e2cb5c553a70", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6f574f9073d944218aa547ea2a08c07b", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationMessageTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper>();
@@ -188,7 +188,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationMessageTagHelper.For = ModelExpr
             WriteLiteral("\r\n    </div>    \r\n    <div class=\"form-group col-6 text-left\" style=\"padding-left: 30px\">\r\n        ");
             EndContext();
             BeginContext(1470, 134, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8034ba79861542b2ab86df570f1f62e3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a19b44090ebb456c947e449b7009ac8c", async() => {
                 BeginContext(1519, 78, true);
                 WriteLiteral("\r\n            <button type=\"submit\" class=\"btn\">Back to all</button>\r\n        ");
                 EndContext();

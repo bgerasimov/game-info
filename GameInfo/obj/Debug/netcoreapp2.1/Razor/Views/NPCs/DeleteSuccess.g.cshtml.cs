@@ -62,7 +62,7 @@ using GameInfo.Models;
             WriteLiteral("\r\n<div class=\"container-fluid\" style=\"padding: 6px 6px 20px 6px\">\r\n    <div class=\"row text-white\" style=\"padding: 4px 12px 4px 12px\">\r\n        <div class=\"col-md-12 text-center\">\r\n            <h5>Successfully deleted NPC.</h5>\r\n            ");
             EndContext();
             BeginContext(295, 140, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c37f06bab66841e692b5ebf1acb28810", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d013c0421a34123927b6380a29089c1", async() => {
                 BeginContext(342, 86, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"btn\">Back to all</button>\r\n            ");
                 EndContext();

@@ -116,7 +116,7 @@ WriteAttributeValue("", 809, guide.UserAvatar, 809, 17, false);
             WriteLiteral("</i>\r\n        </div>\r\n        <div class=\"col-lg-2\" style=\"margin-top: 10px; padding: 0\">\r\n            ");
             EndContext();
             BeginContext(1199, 209, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2d80788a95bc4efbb077ac099abe038f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18e50f739c564f408493f059c7647a0f", async() => {
                 BeginContext(1314, 87, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"btn\">View Details</button>\r\n            ");
                 EndContext();
