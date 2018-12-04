@@ -16,14 +16,17 @@ namespace GameInfo.Controllers
         private readonly INPCsService _NPCsService;
         private readonly AuthorizerService _authorizerService;
         private readonly IItemsService _itemsService;
+        private readonly IQuestsService _questsService;
 
         public NPCsController(INPCsService NPCsService,
             IItemsService itemsService,
+            IQuestsService questsService,
             AuthorizerService authorizerService)
         {
             _NPCsService = NPCsService;
             _authorizerService = authorizerService;
             _itemsService = itemsService;
+            _questsService = questsService;
         }
 
         public IActionResult Index()
@@ -102,6 +105,47 @@ namespace GameInfo.Controllers
         public IActionResult AddItem(AddItemToNPCInputModel model)
         {
             var success = _NPCsService.AddItemToNPC(model);
+
+            if (success)
+            {
+                return RedirectToAction("Details", new { id = model.NPCId });
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> AddQuest(int id)
+        {
+            var user = await _authorizerService.Authorize(HttpContext);
+
+            if (user == null)
+            {
+                return Redirect("/Account/Login");
+            }
+
+            var npc = _NPCsService.ById(id);
+
+            if (npc == null)
+            {
+                return Redirect("/NPCs");
+            }
+
+            var model = new AddQuestToNPCInputModel
+            {
+                NPCId = id,
+                NPCName = npc.Name,
+                Quests = _questsService.All()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddQuest(AddQuestToNPCInputModel model)
+        {
+            var questToAdd = _questsService.ByName(model.QuestTitle);
+            var success = _NPCsService.AddQuestToNPC(model, questToAdd);
 
             if (success)
             {

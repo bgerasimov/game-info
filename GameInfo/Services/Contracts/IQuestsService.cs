@@ -1,4 +1,6 @@
-﻿using GameInfo.Models.ViewModels;
+﻿using GameInfo.Models;
+using GameInfo.Models.InputModels;
+using GameInfo.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +12,12 @@ namespace GameInfo.Services.Contracts
     {
         IList<QuestsAllViewModel> All();
 
-        //void Add(AddItemInputModel model);
-        //
+        void Add(AddQuestInputModel model);
+        
         //Item ById(int id);
-        //
-        //Item ByName(string name);
-        //
+
+        Quest ByName(string title);
+
         //bool Delete(int id);
     }
 }

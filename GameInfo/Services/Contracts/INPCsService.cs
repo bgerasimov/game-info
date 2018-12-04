@@ -16,8 +16,12 @@ namespace GameInfo.Services.Contracts
 
         NPC ById(int id);
 
+        NPC ByName(string name);
+
         bool Delete(int id);
 
         bool AddItemToNPC(AddItemToNPCInputModel model);
+
+        bool AddQuestToNPC(AddQuestToNPCInputModel model, Quest questToAdd);
     }
 }

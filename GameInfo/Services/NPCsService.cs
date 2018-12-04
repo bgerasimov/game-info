@@ -14,7 +14,7 @@ namespace GameInfo.Services
     public class NPCsService : INPCsService
     {
         private readonly GameInfoContext _db;
-        private readonly IItemsService _itemsService;
+        private readonly IItemsService _itemsService;        
 
         public NPCsService(GameInfoContext db, IItemsService itemsService)
         {
@@ -50,6 +50,23 @@ namespace GameInfo.Services
             return true;
         }
 
+        public bool AddQuestToNPC(AddQuestToNPCInputModel model, Quest questToAdd)
+        {
+            var npc = this.ById(model.NPCId);
+
+            if (npc == null)
+            {
+                return false;
+            }
+
+            var quest = questToAdd;
+
+            npc.Quests.Add(quest);
+            _db.SaveChanges();
+
+            return true;
+        }
+
         public IList<NPCsAllViewModel> All()
         {
             var NPCs = this._db.NPCs?
@@ -65,8 +82,15 @@ namespace GameInfo.Services
 
         public NPC ById(int id)
         {
-            var npc = _db.NPCs.Include(x => x.Loot).FirstOrDefault(x => x.Id == id);
+            var npc = _db.NPCs.Include(x => x.Loot).Include(x => x.Quests).FirstOrDefault(x => x.Id == id);
            
+            return npc;
+        }
+
+        public NPC ByName(string name)
+        {
+            var npc = _db.NPCs.FirstOrDefault(x => x.Name == name);
+
             return npc;
         }
 

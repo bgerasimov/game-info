@@ -1,0 +1,42 @@
+﻿@model GameInfo.Models.InputModels.AddQuestInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row container-fluid text-white" style="padding: 6px 30px 6px 30px;">
+    <h2>Add a quest</h2>
+</div>
+<div class="row text-white">
+    <form class="col-md-12" method="post" asp-controller="Quests" asp-action="Add">
+        <div class="form-group col-md-4">
+            <label asp-for="Title">Quest title:</label>
+            <input asp-for="Title" class="form-control" placeholder="Quest title...">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="QuestText">Quest Text:</label>
+            <textarea rows="10" cols="10" for="QuestText" class="form-control" id="QuestText" name="QuestText">
+            </textarea>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="CompletionCondition">Completion condition:</label>
+            <input asp-for="CompletionCondition" class="form-control" placeholder="Completion condition...">
+            <span asp-validation-for="CompletionCondition" class="text-danger"></span>
+        </div>
+        @{ var questGivers = Model.NPCs.Select(x => x.Name); }
+        <div class="form-group col-md-4">
+            <label asp-for="QuestGiver">Quest Giver: <i style="color: gray">(If the quest giver isn't present in the list, add the NPC first.)</i></label>
+            <p>                
+                <select asp-for="QuestGiver" asp-items="@(new SelectList(questGivers))">Quest Giver</select>
+            </p>
+        </div>
+        <div class="form-group col-md-4 button-holder text-left">
+            <button type="submit" class="btn">Add quest</button>
+        </div>
+    </form>
+    <div class="form-group col-md-12" style="padding-left: 30px">
+        <form asp-controller="Quests" asp-action="Index">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+</div>
