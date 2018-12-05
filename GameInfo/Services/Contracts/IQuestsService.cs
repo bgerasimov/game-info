@@ -14,10 +14,10 @@ namespace GameInfo.Services.Contracts
 
         void Add(AddQuestInputModel model);
         
-        //Item ById(int id);
+        Quest ById(int id);
 
         Quest ByName(string title);
 
-        //bool Delete(int id);
+        bool Delete(int id);
     }
 }

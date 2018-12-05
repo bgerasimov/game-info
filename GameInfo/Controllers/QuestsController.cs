@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GameInfo.Models.InputModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameInfo.Controllers
@@ -58,6 +59,38 @@ namespace GameInfo.Controllers
             _questsService.Add(inputModel);
 
             return Redirect("/Quests");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var quest = _questsService.ById(id);
+
+            if (quest == null)
+            {
+                return Redirect("/Quests");
+            }
+
+            return View(quest);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int id)
+        {
+            var success = _questsService.Delete(id);
+
+            if (success)
+            {
+                return Redirect("/Quests/DeleteSuccess");
+            }
+
+            return Redirect("/Quests/Index");
+        }
+
+        public IActionResult DeleteSuccess()
+        {
+            return View();
         }
     }
 }

@@ -69,6 +69,7 @@ namespace GameInfo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {

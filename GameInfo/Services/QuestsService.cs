@@ -3,6 +3,7 @@ using GameInfo.Models;
 using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,11 +55,32 @@ namespace GameInfo.Services
             return quests;
         }
 
+        public Quest ById(int id)
+        {
+            var quest = _db.Quests.Include(x => x.QuestGiver).FirstOrDefault(x => x.Id == id);
+
+            return quest;
+        }
+
         public Quest ByName(string title)
         {
             var quest = _db.Quests.FirstOrDefault(x => x.Title == title);
 
             return quest;
+        }
+
+        public bool Delete(int id)
+        {
+            var quest = this.ById(id);
+
+            if (quest != null)
+            {
+                _db.Quests.Remove(quest);
+                _db.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }
