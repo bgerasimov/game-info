@@ -1,4 +1,4 @@
-﻿@model GameInfo.Models.NPC
+﻿@model GameInfo.Models.ViewModels.NPCDetailsViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -18,9 +18,19 @@
         {
             foreach (var quest in Model.Quests)
             {
-                <p>
-                    <a asp-controller="Quests" asp-action="Details" asp-route-id="@quest.Id" style="color: white">@quest.Title</a>
-                </p>
+                <div class="row" style="margin: 0; padding-bottom: 5px">
+                    <div class="col-12" style="margin:0; padding: 0">
+                        <a asp-controller="Quests" asp-action="Details" asp-route-id="@quest.Id" style="float: left; color: white">@quest.QuestTitle</a>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <form style="float: right" asp-controller="NPCs" asp-action="RemoveQuest" id="questRemovalForm" method="post">
+                                <input type="hidden" asp-for="@Model.Id" />
+                                <input type="hidden" asp-for="@Model.QuestId" value="@quest.Id"/>
+                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('questRemovalForm').submit();">Remove quest from NPC</a>
+                            </form>
+                        }
+                    </div>
+                </div>
             }
         }
         else
@@ -37,13 +47,21 @@
         {
             foreach (var item in Model.Loot)
             {
-        <div class="row" style="border-bottom: solid 1px #6B6B6B; margin-left: 0; margin-right: 0">
-            <div class="col-lg-12 text-left">
-                <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color: white">
-                    @item.Name
-                </a>
-            </div>
-        </div>
+                <div class="row" style="border-bottom: solid 1px #6B6B6B; margin-left: 0; margin-right: 0">
+                    <div class="col-lg-12 text-left">
+                        <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="float: left; color: white">
+                            @item.Name
+                        </a>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <form style="float: right" asp-controller="NPCs" asp-action="RemoveItem" id="itemRemovalForm" method="post">
+                                <input type="hidden" asp-for="@Model.Id" />
+                                <input type="hidden" asp-for="@Model.ItemId" value="@item.Id" />
+                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('itemRemovalForm').submit();">Remove item from NPC</a>
+                            </form>
+                        }
+                    </div>
+                </div>
             }
         }
         else

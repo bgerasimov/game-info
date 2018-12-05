@@ -23,5 +23,9 @@ namespace GameInfo.Services.Contracts
         bool AddItemToNPC(AddItemToNPCInputModel model);
 
         bool AddQuestToNPC(AddQuestToNPCInputModel model, Quest questToAdd);
+
+        Task RemoveQuest(NPC npc, Quest quest);
+
+        Task RemoveItem(NPC npc, Item item);
     }
 }

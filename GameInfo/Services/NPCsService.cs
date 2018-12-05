@@ -107,5 +107,23 @@ namespace GameInfo.Services
 
             return false;
         }
+
+        public async Task RemoveItem(NPC npc, Item item)
+        {
+            if (npc.Loot.Contains(item))
+            {
+                npc.Loot.Remove(item);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveQuest(NPC npc, Quest quest)
+        {
+            if (npc.Quests.Contains(quest))
+            {
+                npc.Quests.Remove(quest);
+                await _db.SaveChangesAsync();
+            }
+        }
     }
 }

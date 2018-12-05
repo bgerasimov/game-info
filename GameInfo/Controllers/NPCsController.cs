@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameInfo.Models;
 using GameInfo.Models.InputModels;
+using GameInfo.Models.ViewModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
@@ -71,7 +72,15 @@ namespace GameInfo.Controllers
                 return Redirect("/NPCs");
             }
 
-            return View(npc);
+            var viewModel = new NPCDetailsViewModel
+            {
+                Id = npc.Id,
+                Name = npc.Name,
+                Loot = npc.Loot.Select(x => new ItemsAllViewModel { Id = x.Id, Name = x.Name }).ToList(),
+                Quests = npc.Quests.Select(x => new QuestsAllViewModel { Id = x.Id, QuestTitle = x.Title }).ToList()
+            };
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> AddItem(int id)
@@ -153,6 +162,44 @@ namespace GameInfo.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RemoveQuest(NPCDetailsViewModel model)
+        {
+            var npc = _NPCsService.ById(model.Id);
+
+            var quest = _questsService.ById(model.QuestId);
+
+            if (quest == null || npc == null)
+            {
+                return Redirect("/NPCs");
+            }
+            
+            await _NPCsService.RemoveQuest(npc, quest);
+            
+            return Redirect("/NPCs/Details/" + npc.Id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RemoveItem(NPCDetailsViewModel model)
+        {
+            var npc = _NPCsService.ById(model.Id);
+
+            var item = _itemsService.ById(model.ItemId);
+
+            if (item == null || npc == null)
+            {
+                return Redirect("/NPCs");
+            }
+
+            await _NPCsService.RemoveItem(npc, item);
+
+            return Redirect("/NPCs/Details/" + npc.Id);
         }
 
         [HttpPost]
