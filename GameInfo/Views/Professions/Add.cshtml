@@ -1,0 +1,43 @@
+﻿@model GameInfo.Models.InputModels.AddProfessionInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row container-fluid text-white" style="padding: 6px 30px 6px 30px;">
+    <h2>Add a profession</h2>
+</div>
+<div class="row text-white">
+    <form class="col-md-12" method="post" asp-controller="Professions" asp-action="Add">
+        <div class="form-group col-md-4">
+            <label asp-for="Name">Profession name:</label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" placeholder="Name...">
+        </div>
+        <div class="form-group col-md-5">
+            <label asp-for="ClassRole">Class Role: </label>
+            <p>
+                <select asp-for="ClassRole" asp-items="@(new SelectList(Model.ClassRoles))"></select>
+            </p>
+        </div>
+        <div class="form-group col-md-5">
+            <label asp-for="CombatType">Combat Type: </label>
+            <p>
+                <select asp-for="CombatType" asp-items="@(new SelectList(Model.CombatTypes))"></select>
+            </p>
+        </div>
+        <div class="form-group col-md-5">
+            <label asp-for="UsableWeaponType">Weapon Type: </label>
+            <p>
+                <select asp-for="UsableWeaponType" asp-items="@(new SelectList(Model.WeaponTypes))"></select>
+            </p>
+        </div>
+        <div class="form-group col-md-4 button-holder text-left">
+            <button type="submit" class="btn">Add profession</button>
+        </div>
+    </form>
+    <div class="form-group col-md-12" style="padding-left: 30px">
+        <form asp-controller="Professions" asp-action="Index">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+</div>

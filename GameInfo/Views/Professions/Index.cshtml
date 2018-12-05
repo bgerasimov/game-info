@@ -1,0 +1,54 @@
+﻿@model List<GameInfo.Models.ViewModels.ProfessionsAllViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container-fluid" style="border: solid 1px white; border-radius: 10px;">
+    @if (Model.Count == 0)
+    {
+        <h4 class="text-white text-center" style="padding-top: 4px">No professions have been added yet.</h4>
+        <hr style="background-color: white" />
+    }
+    else
+    {
+        <div class="row text-white" style="padding: 0px 12px 0px 12px; border-bottom: 1px solid white">
+            <div class="col-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
+                <p><b>Profession</b></p>
+            </div>
+            <div class="col-4 text-left" style="padding-top: 1%">
+                <p><b>Role</b></p>
+            </div>
+        </div>
+        @foreach (var profession in Model.OrderBy(x => x.Name))
+        {
+            <div class="row text-white" style="padding: 0px 12px 0px 12px; border-bottom: 1px solid gray">
+                <div class="col-lg-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
+                    <p>
+                        <a asp-controller="Professions" asp-action="Details" asp-route-id="@profession.Id" style="color:white">
+                            <i>@profession.Name</i>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-lg-4 text-left" style="padding-top: 1%">
+                    <p>
+                        <i>@profession.ClassRole</i>
+                    </p>
+                </div>
+            </div>
+        }
+    }
+    <div class="row" style="padding-top: 2px">
+        <div class="col-6">
+            <form asp-controller="Professions" asp-action="Add" method="get">
+                <button type="submit" class="btn" style="margin: 4px">Add a profession</button>
+            </form>
+        </div>
+        <div class="col-6 text-right">
+            <form asp-controller="Home" asp-action="Index" method="get">
+                <button type="submit" class="btn" style="margin: 4px">Back to Index</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />

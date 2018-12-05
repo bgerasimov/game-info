@@ -15,7 +15,6 @@ namespace GameInfo.Models.Enums
         Mace,
         Staff,
         Sword,
-        Greatsword,
-        Shield
+        Greatsword
     }
 }

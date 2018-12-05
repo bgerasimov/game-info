@@ -1,0 +1,51 @@
+﻿using GameInfo.Data;
+using GameInfo.Models;
+using GameInfo.Models.Enums;
+using GameInfo.Models.InputModels;
+using GameInfo.Models.ViewModels;
+using GameInfo.Services.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace GameInfo.Services
+{
+    public class ProfessionsService : IProfessionsService
+    {
+        private readonly GameInfoContext _db;
+
+        public ProfessionsService(GameInfoContext db)
+        {
+            _db = db;
+        }
+
+        public void Add(AddProfessionInputModel model)
+        {
+            var profession = new Profession
+            {
+                Name = model.Name,
+                ClassRole = (ClassRole)Enum.Parse(typeof(ClassRole), model.ClassRole),
+                CombatType = (CombatType)Enum.Parse(typeof(CombatType), model.CombatType),
+                UsableWeapon = (WeaponType)Enum.Parse(typeof(WeaponType), model.UsableWeaponType)                
+            };
+
+            this._db.Professions.Add(profession);
+            this._db.SaveChanges();
+        }
+
+        public IList<ProfessionsAllViewModel> All()
+        {
+            var professions = this._db.Professions?
+               .Select(x => new ProfessionsAllViewModel
+               {
+                   Id = x.Id,
+                   Name = x.Name,
+                   ClassRole = x.ClassRole.ToString()
+               })
+               .ToList();
+
+            return professions;
+        }
+    }
+}
