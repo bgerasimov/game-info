@@ -1,0 +1,31 @@
+﻿@model GameInfo.Models.InputModels.AddRaceInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row container-fluid text-white" style="padding: 6px 30px 6px 30px;">
+    <h2>Add a race</h2>
+</div>
+<div class="row text-white">
+    <form class="col-md-12" method="post" asp-controller="Races" asp-action="Add">
+        <div class="form-group col-md-4">
+            <label asp-for="Name">Race name:</label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" placeholder="Name...">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="Description">Description:</label>
+            <span asp-validation-for="Description" class="text-danger"></span>
+            <textarea rows="15" cols="15" for="Description" class="form-control" id="Description" name="Description">
+            </textarea>
+        </div>
+        <div class="form-group col-md-4 button-holder text-left">
+            <button type="submit" class="btn">Add race</button>
+        </div>
+    </form>
+    <div class="form-group col-md-12" style="padding-left: 30px">
+        <form asp-controller="Races" asp-action="Index">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+</div>

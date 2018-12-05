@@ -85,7 +85,7 @@
         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
         {
             <form asp-controller="NPCs" asp-action="Delete" asp-route-id="@Model.Id">
-                <button type="submit" class="btn">Delete NPC</button>
+                <button type="submit" class="btn" style="background-color:#D51818">Delete NPC</button>
             </form>
         }
     </div>

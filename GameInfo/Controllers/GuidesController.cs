@@ -52,9 +52,13 @@ namespace GameInfo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddGuideInputModel inputModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             if (inputModel.GuideContent.Contains('<') 
-                || inputModel.GuideContent.Contains('>')
-                || !ModelState.IsValid)
+                || inputModel.GuideContent.Contains('>'))
             {
                 return View();
             }

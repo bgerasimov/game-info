@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace GameInfo.Models.InputModels
 {
-    public class AddItemInputModel
+    public class AddRaceInputModel
     {
         [Required]
-        [StringLength(40)]
+        [StringLength(20)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(70)]
-        [Display(Name = "Acquired From")]
-        public string AcquiredFrom { get; set; }
-
-        [Required]
-        public string Usage { get; set; }
+        [StringLength(255)]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
     }
 }

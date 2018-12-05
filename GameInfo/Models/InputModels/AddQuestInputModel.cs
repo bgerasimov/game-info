@@ -16,10 +16,12 @@ namespace GameInfo.Models.InputModels
         [Required]
         [StringLength(255)]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Quest Text")]
         public string QuestText { get; set; }
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Completion Condition")]
         public string CompletionCondition { get; set; }
 
         public List<NPCsAllViewModel> NPCs { get; set; }

@@ -9,19 +9,20 @@
 <div class="row text-white">
     <form class="col-md-12" method="post" asp-controller="Quests" asp-action="Add">
         <div class="form-group col-md-4">
-            <label asp-for="Title">Quest title:</label>
-            <input asp-for="Title" class="form-control" placeholder="Quest title...">
+            <label asp-for="Title">Quest title: </label>
             <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Title" class="form-control" placeholder="Quest title...">
         </div>
         <div class="form-group col-md-4">
-            <label for="QuestText">Quest Text:</label>
+            <label for="QuestText">Quest Text: </label>
+            <span asp-validation-for="QuestText" class="text-danger"></span>
             <textarea rows="10" cols="10" for="QuestText" class="form-control" id="QuestText" name="QuestText">
             </textarea>
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="CompletionCondition">Completion condition:</label>
-            <input asp-for="CompletionCondition" class="form-control" placeholder="Completion condition...">
+            <label asp-for="CompletionCondition">Completion condition: </label>
             <span asp-validation-for="CompletionCondition" class="text-danger"></span>
+            <input asp-for="CompletionCondition" class="form-control" placeholder="Completion condition...">
         </div>
         @{ var questGivers = Model.NPCs.Select(x => x.Name); }
         <div class="form-group col-md-4">

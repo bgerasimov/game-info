@@ -26,7 +26,7 @@
             @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
             {
                 <form asp-controller="Guides" asp-action="Delete" asp-route-id="@Model.Id">
-                    <button type="submit" class="btn">Delete guide</button>
+                    <button type="submit" class="btn" style="background-color:#D51818">Delete guide</button>
                 </form>
             }
         </div>

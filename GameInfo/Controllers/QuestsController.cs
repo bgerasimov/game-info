@@ -53,7 +53,11 @@ namespace GameInfo.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                inputModel = new AddQuestInputModel
+                {
+                    NPCs = _NPCsService.All()?.ToList()
+                };
+                return View(inputModel);
             }
 
             _questsService.Add(inputModel);
