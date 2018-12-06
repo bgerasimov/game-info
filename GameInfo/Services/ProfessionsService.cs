@@ -4,6 +4,7 @@ using GameInfo.Models.Enums;
 using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,20 @@ namespace GameInfo.Services
                .ToList();
 
             return professions;
+        }
+
+        public Profession ById(int id)
+        {
+            var profession = _db.Professions.Include(x => x.Races).FirstOrDefault(x => x.Id == id);
+
+            return profession;
+        }
+
+        public Profession ByName(string name)
+        {
+            var profession = _db.Professions.FirstOrDefault(x => x.Name == name);
+
+            return profession;
         }
     }
 }

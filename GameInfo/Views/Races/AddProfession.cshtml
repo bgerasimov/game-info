@@ -1,0 +1,30 @@
+﻿@model GameInfo.Models.InputModels.AddProfessionToRaceInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row text-center text-white">
+    <div class="form-group col-lg-12">
+        <h4>Adding item to: <i>@Model.RaceName</i></h4>
+        <form asp-controller="Races" asp-action="AddProfession" method="post">
+
+            <input type="hidden" asp-for="@Model.RaceId" />
+
+            <label asp-for="ProfessionName">Professions:</label>
+            <p>
+                @{ var professions = Model.Professions.OrderBy(x => x.Name).Select(x => x.Name).ToList(); }
+                <select asp-for="ProfessionName" asp-items="@(new SelectList(professions))"></select>
+            </p>
+            <button type="submit" class="btn">Add profession to race</button>
+        </form>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-12">
+        <form asp-controller="Races" asp-action="Details" asp-route-id="@Model.RaceId">
+            <button type="submit" class="btn">Back to race</button>
+        </form>
+    </div>
+</div>
+<br />

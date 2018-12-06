@@ -37,6 +37,9 @@
     <Content Update="Views\Quests\DeleteSuccess.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Races\DeleteSuccess.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

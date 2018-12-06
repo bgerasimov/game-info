@@ -1,4 +1,5 @@
-﻿using GameInfo.Models.InputModels;
+﻿using GameInfo.Models;
+using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace GameInfo.Services.Contracts
         
         void Add(AddRaceInputModel model);
         
-        //Quest ById(int id);
-        //
+        Race ById(int id);
+
+        bool AddProfessionToRace(AddProfessionToRaceInputModel model);
+
         //Quest ByName(string title);
-        //
-        //bool Delete(int id);
+        
+        bool Delete(int id);
     }
 }

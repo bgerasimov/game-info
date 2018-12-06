@@ -14,7 +14,5 @@ namespace GameInfo.Models.ViewModels
         public string Description { get; set; }
 
         public List<ProfessionsAllViewModel> Professions { get; set; }
-
-        public int ProfessionId { get; set; }
     }
 }

@@ -1,0 +1,59 @@
+﻿@model GameInfo.Models.ViewModels.RaceDetailsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<GameInfoUser> SignInManager
+
+<div class="row text-white" style="padding-left: 4%; padding-top: 4%; margin-right: 1%">
+    <div class="col-md-8" style="padding-top: 6px">
+        <p style="border-bottom: 1px solid gray; margin-bottom: 0">
+            <b>Name:</b>
+        </p>
+        <p><i>@Model.Name</i></p>
+        <p style="border-bottom: 1px solid gray; margin-bottom: 0">
+            <b>Description:</b>
+        </p>
+        <p><i>@Model.Description</i></p>
+        <p style="border-bottom: 1px solid gray; margin-bottom: 0">
+            <b>Playable professions:</b>
+        </p>
+        @if (Model.Professions.Count < 1)
+        {
+            <p><i>None added yet</i></p>
+        }
+        else
+        {
+            @foreach (var profession in Model.Professions)
+            {
+                <i>
+                    <a class="text-white" asp-controller="Professions" asp-action="Details" asp-route-id="@profession.Id">@profession.Name</a>
+                </i>
+                <br />
+            }
+        }
+    </div>
+</div>
+<div class="row" style="padding-left: 4%; padding-bottom: 2%">
+    <div class="col-lg-2" style="padding-top:2%">
+        <form asp-controller="Races" asp-action="AddProfession" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn">Add a profession</button>
+        </form>
+    </div>
+    <div class="col-lg-2" style="padding-top:2%">
+        <form asp-controller="Races" asp-action="Index" method="get">
+            <button type="submit" class="btn">Back to all races</button>
+        </form>
+    </div>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <div class="col-lg-4 text-right" style="padding-top:2%">
+            <form asp-controller="Races" asp-action="Delete" asp-route-id="@Model.Id">
+                <button type="submit" class="btn" style="background-color:#D51818">Delete race</button>
+            </form>
+        </div>
+    }
+</div>
