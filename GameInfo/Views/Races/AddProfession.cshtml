@@ -6,7 +6,7 @@
 <br />
 <div class="row text-center text-white">
     <div class="form-group col-lg-12">
-        <h4>Adding item to: <i>@Model.RaceName</i></h4>
+        <h4>Adding profession to: <i>@Model.RaceName</i></h4>
         <form asp-controller="Races" asp-action="AddProfession" method="post">
 
             <input type="hidden" asp-for="@Model.RaceId" />
@@ -15,6 +15,9 @@
             <p>
                 @{ var professions = Model.Professions.OrderBy(x => x.Name).Select(x => x.Name).ToList(); }
                 <select asp-for="ProfessionName" asp-items="@(new SelectList(professions))"></select>
+            </p>
+            <p>
+                <i>If a profession isn't in the list, add it to the website first.</i>
             </p>
             <button type="submit" class="btn">Add profession to race</button>
         </form>

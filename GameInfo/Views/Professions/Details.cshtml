@@ -1,0 +1,86 @@
+﻿@model GameInfo.Models.ViewModels.ProfessionDetailsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<GameInfoUser> SignInManager
+
+<div class="row text-white" style="padding-left: 4%; padding-top: 4%; margin-left: 1%; margin-right: 1%; border-bottom: solid 1px white">
+    <div class="col-lg-6" style="padding-bottom: 2%;border-right: solid 1px white">
+        <h3>Name: <i>@Model.Name</i></h3>
+    </div>
+    <div class="col-lg-6">
+        <div class="row" style="border-bottom: solid 1px #6B6B6B">
+            <div class="col-lg-4">
+                Usable Weapon:
+            </div>
+            <div class="col-lg-4">
+                Combat Type:
+            </div>
+            <div class="col-lg-4">
+                Class Role:
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <i>@Model.UsableWeapon</i>
+            </div>
+            <div class="col-lg-4">
+                <i>@Model.CombatType</i>
+            </div>
+            <div class="col-lg-4">
+                <i>@Model.ClassRole</i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-white" style="padding-left: 4%; padding-top: 2%; padding-bottom: 3%; margin-right: 1%;">
+    <div class="col-lg-12">
+        <h3>Available To:</h3>
+        <i>If you want to add a new entry, go to the race and add this profession to it.</i>
+        <hr style="background-color: white" />
+        @if (Model.Races.Count != 0)
+        {
+            foreach (var race in Model.Races)
+            {
+                <div class="row" style="border-bottom: solid 1px #6B6B6B; margin-left: 0; margin-right: 0">
+                    <div class="col-lg-12 text-left">
+                        <a asp-controller="Races" asp-action="Details" asp-route-id="@race.Id" style="float: left; color: white">
+                            @race.Name
+                        </a>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <form style="float: right" asp-controller="Professions" asp-action="RemoveRace" id="raceRemovalForm" method="post">
+                                <input type="hidden" asp-for="@Model.Id" />
+                                <input type="hidden" asp-for="@Model.RaceId" value="@race.Id" />
+                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('raceRemovalForm').submit();">Remove race from profession</a>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h5>No races have been added to this profession.</h5>
+        }
+    </div>
+</div>
+<div class="row" style="padding-bottom: 2%; padding-top: 1%; margin-left:1%; margin-right: 1%; border-top: solid 1px white">
+    <div class="col-lg-6 text-left">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <form asp-controller="Professions" asp-action="Delete" asp-route-id="@Model.Id">
+                <button type="submit" class="btn" style="background-color:#D51818">Delete profession</button>
+            </form>
+        }
+    </div>
+    <div class="col-lg-6 text-right">
+        <form asp-controller="Professions" asp-action="Index" method="get">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+</div>

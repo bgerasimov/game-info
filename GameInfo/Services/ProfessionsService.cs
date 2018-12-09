@@ -62,5 +62,30 @@ namespace GameInfo.Services
 
             return profession;
         }
+
+        public async Task RemoveRace(Profession profession, Race race)
+        {
+            if (profession.Races.Any(x => x.RaceId == race.Id))
+            {
+                var raceToRemove = profession.Races.FirstOrDefault(x => x.RaceId == race.Id);
+
+                profession.Races.Remove(raceToRemove);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            var profession = this.ById(id);
+
+            if (profession != null)
+            {
+                _db.Professions.Remove(profession);
+                _db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
     }
 }

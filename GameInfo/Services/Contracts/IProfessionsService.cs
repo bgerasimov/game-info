@@ -17,5 +17,9 @@ namespace GameInfo.Services.Contracts
         Profession ById(int id);
 
         Profession ByName(string name);
+
+        Task RemoveRace(Profession profession, Race race);
+
+        bool Delete(int id);
     }
 }

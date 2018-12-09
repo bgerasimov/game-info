@@ -18,7 +18,7 @@ namespace GameInfo.Services.Contracts
 
         bool AddProfessionToRace(AddProfessionToRaceInputModel model);
 
-        //Quest ByName(string title);
+        //Race ByName(string name);
         
         bool Delete(int id);
     }
