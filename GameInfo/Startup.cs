@@ -56,6 +56,8 @@ namespace GameInfo
             services.AddScoped<IQuestsService, QuestsService>();
             services.AddScoped<IRacesService, RacesService>();
             services.AddScoped<IProfessionsService, ProfessionsService>();
+            services.AddScoped<IDungeonsService, DungeonsService>();
+            services.AddScoped<IAchievementsService, AchievementsService>();
             services.AddScoped<AuthorizerService>();
 
             services.ConfigureApplicationCookie(options =>
