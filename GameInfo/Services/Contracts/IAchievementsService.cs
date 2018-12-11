@@ -17,5 +17,9 @@ namespace GameInfo.Services.Contracts
         Achievement ByName(string name);
 
         Achievement ById(int? id);
+
+        bool Delete(int id);
+
+        bool AddItemToAchievement(AddItemToAchievementInputModel model);
     }
 }

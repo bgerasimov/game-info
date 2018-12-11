@@ -28,6 +28,12 @@
     <Content Update="Views\Account\Register.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Achievements\AddReward.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Achievements\DeleteSuccess.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Dungeons\AddReward.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

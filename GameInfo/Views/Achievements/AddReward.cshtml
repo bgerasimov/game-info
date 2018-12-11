@@ -1,0 +1,33 @@
+﻿@model GameInfo.Models.InputModels.AddItemToAchievementInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row text-center text-white">
+    <div class="form-group col-lg-12">
+        <h4>Adding item reward to: <i>@Model.AchievementName</i></h4>
+        <form asp-controller="Achievements" asp-action="AddReward" method="post">
+
+            <input type="hidden" asp-for="@Model.AchievementId" />
+
+            <label asp-for="ItemName">Items:</label>
+            <p>
+                @{ var items = Model.Items.OrderBy(x => x.Name).Select(x => x.Name).ToList(); }
+                <select asp-for="ItemName" asp-items="@(new SelectList(items))"></select>
+            </p>
+            <p>
+                <i>If an item isn't in the list, add it to the website first.</i>
+            </p>
+            <button type="submit" class="btn">Add reward to achievement</button>
+        </form>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-12">
+        <form asp-controller="Achievements" asp-action="Details" asp-route-id="@Model.AchievementId">
+            <button type="submit" class="btn">Back to achievement</button>
+        </form>
+    </div>
+</div>
+<br />

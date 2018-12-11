@@ -1,0 +1,62 @@
+﻿@model GameInfo.Models.Achievement
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<GameInfoUser> SignInManager
+
+<div class="row text-white" style="padding-left: 4%; padding-top: 4%; margin-right: 1%">
+    <div class="col-md-8" style="padding-top: 6px">
+        <h4 style="border-bottom: 1px solid gray; margin-bottom: 0">
+            <b>Name: </b><i>@Model.Name</i>
+        </h4>
+        <br />
+        <h4 style="border-bottom: 1px solid gray; margin-bottom: 0">
+            <b>How to acquire: </b><i>@Model.AcquisitionConditions</i>
+        </h4>
+        <br />
+        <h4 style="border-bottom: 1px solid gray; margin-bottom: 0">
+            <b>Item rewards:</b>
+            <br />
+        </h4>
+        <h5>
+            @if (Model.Rewards.Count < 1)
+            {
+                <i>None added yet</i>
+            }
+            else
+            {
+                @foreach (var item in Model.Rewards)
+                {
+                    <i>
+                        <a class="text-white" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                    </i>
+                    <br />
+                }
+            }
+        </h5>
+    </div>
+</div>
+<div class="row" style="padding-left: 4%; padding-bottom: 2%">
+    <div class="col-lg-2" style="padding-top:2%">
+        <form asp-controller="Achievements" asp-action="AddReward" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn">Add an item reward</button>
+        </form>
+    </div>
+    <div class="col-lg-2" style="padding-top:2%">
+        <form asp-controller="Achievements" asp-action="Index" method="get">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <div class="col-lg-4 text-right" style="padding-top:2%">
+            <form asp-controller="Achievements" asp-action="Delete" asp-route-id="@Model.Id">
+                <button type="submit" class="btn" style="background-color:#D51818">Delete achievement</button>
+            </form>
+        </div>
+    }
+</div>
