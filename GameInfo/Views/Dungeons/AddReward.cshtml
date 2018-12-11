@@ -1,0 +1,33 @@
+﻿@model GameInfo.Models.InputModels.AddItemToDungeonInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row text-center text-white">
+    <div class="form-group col-lg-12">
+        <h4>Adding reward to: <i>@Model.DungeonName</i></h4>
+        <form asp-controller="Dungeons" asp-action="AddReward" method="post">
+
+            <input type="hidden" asp-for="@Model.DungeonId" />
+
+            <label asp-for="ItemName">Items:</label>
+            <p>
+                <i>If the item isn't listed, add it to the site first.</i>
+            </p>
+            <p>
+                @{ var items = Model.Items.OrderBy(x => x.Name).Select(x => x.Name).ToList(); }
+                <select asp-for="ItemName" asp-items="@(new SelectList(items))"></select>
+            </p>
+            <button type="submit" class="btn">Add reward</button>
+        </form>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-12">
+        <form asp-controller="Dungeons" asp-action="Details" asp-route-id="@Model.DungeonId">
+            <button type="submit" class="btn">Back to dungeon</button>
+        </form>
+    </div>
+</div>
+<br />

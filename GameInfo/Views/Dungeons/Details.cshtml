@@ -67,7 +67,7 @@
                         </a>
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <form style="float: right" asp-controller="NPCs" asp-action="RemoveItem" id="itemRemovalForm" method="post">
+                            <form style="float: right" asp-controller="Dungeons" asp-action="RemoveItem" id="itemRemovalForm" method="post">
                                 <input type="hidden" asp-for="@Model.Id" />
                                 <input type="hidden" asp-for="@Model.ItemId" value="@item.Id" />
                                 <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('itemRemovalForm').submit();">Remove item from rewards</a>
@@ -90,8 +90,8 @@
         </form>
     </div>
     <div class="col-lg-2">
-        <form asp-controller="Dungeons" asp-action="AddItem" asp-route-id="@Model.Id" method="get">
-            <button type="submit" class="btn">Add item</button>
+        <form asp-controller="Dungeons" asp-action="AddReward" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn">Add item reward</button>
         </form>
     </div>
     <div class="col-lg-6 text-right">

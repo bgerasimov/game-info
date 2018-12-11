@@ -17,5 +17,9 @@ namespace GameInfo.Services.Contracts
         Dungeon ById(int id);
 
         bool Delete(int id);
+
+        bool AddBossToDungeon(AddBossToDungeonInputModel model, NPC NPCToAdd);
+
+        bool AddItemToDungeon(AddItemToDungeonInputModel model, Item itemToAdd);
     }
 }

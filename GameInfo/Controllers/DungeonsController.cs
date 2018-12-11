@@ -15,15 +15,21 @@ namespace GameInfo.Controllers
     {
         private readonly IDungeonsService _dungeonsService;
         private readonly IAchievementsService _achievementsService;
+        private readonly IItemsService _itemsService;
+        private readonly INPCsService _NPCsService;
         private readonly AuthorizerService _authorizerService;
 
         public DungeonsController(IDungeonsService dungeonsService,
             IAchievementsService achievementsService,
+            IItemsService itemsService,
+            INPCsService NPCsService,
             AuthorizerService authorizerService)
         {
             _dungeonsService = dungeonsService;
             _authorizerService = authorizerService;
             _achievementsService = achievementsService;
+            _itemsService = itemsService;
+            _NPCsService = NPCsService;
         }
 
         public IActionResult Index()
@@ -90,6 +96,88 @@ namespace GameInfo.Controllers
             viewModel.AchievementRewardId = _achievementsService.ById(dungeon.AchievementRewardId)?.Id;
 
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> AddBoss(int id)
+        {
+            var user = await _authorizerService.Authorize(HttpContext);
+
+            if (user == null)
+            {
+                return Redirect("/Account/Login");
+            }
+
+            var dungeon = _dungeonsService.ById(id);
+
+            if (dungeon == null)
+            {
+                return Redirect("/Dungeons");
+            }
+
+            var model = new AddBossToDungeonInputModel
+            {
+                DungeonId = id,
+                DungeonName = dungeon.Name,
+                NPCs = _NPCsService.All()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddBoss(AddBossToDungeonInputModel model)
+        {
+            var bossToAdd = _NPCsService.ByName(model.BossName);
+            var success = _dungeonsService.AddBossToDungeon(model, bossToAdd);
+
+            if (success)
+            {
+                return RedirectToAction("Details", new { id = model.DungeonId });
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> AddReward(int id)
+        {
+            var user = await _authorizerService.Authorize(HttpContext);
+
+            if (user == null)
+            {
+                return Redirect("/Account/Login");
+            }
+
+            var dungeon = _dungeonsService.ById(id);
+
+            if (dungeon == null)
+            {
+                return Redirect("/Dungeons");
+            }
+
+            var model = new AddItemToDungeonInputModel
+            {
+                DungeonId = id,
+                DungeonName = dungeon.Name,
+                Items = _itemsService.All()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddReward(AddItemToDungeonInputModel model)
+        {
+            var itemToAdd = _itemsService.ByName(model.ItemName);
+            var success = _dungeonsService.AddItemToDungeon(model, itemToAdd);
+            
+            if (success)
+            {
+                return RedirectToAction("Details", new { id = model.DungeonId });
+            }
+
+            return View(model);
         }
 
         [HttpPost]

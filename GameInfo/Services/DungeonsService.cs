@@ -39,6 +39,40 @@ namespace GameInfo.Services
             this._db.SaveChanges();
         }
 
+        public bool AddBossToDungeon(AddBossToDungeonInputModel model, NPC NPCToAdd)
+        {
+            var dungeon = this.ById(model.DungeonId);
+
+            if (dungeon == null)
+            {
+                return false;
+            }
+
+            var npc = NPCToAdd;
+
+            dungeon.Bosses.Add(npc);
+            _db.SaveChanges();
+
+            return true;
+        }
+
+        public bool AddItemToDungeon(AddItemToDungeonInputModel model, Item itemToAdd)
+        {
+            var dungeon = this.ById(model.DungeonId);
+
+            if (dungeon == null)
+            {
+                return false;
+            }
+
+            var item = itemToAdd;
+
+            dungeon.Rewards.Add(item);
+            _db.SaveChanges();
+
+            return true;
+        }
+
         public IList<DungeonsAllViewModel> All()
         {
             var dungeons = this._db.Dungeons?

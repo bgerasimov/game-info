@@ -1,0 +1,33 @@
+﻿@model GameInfo.Models.InputModels.AddBossToDungeonInputModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row text-center text-white">
+    <div class="form-group col-lg-12">
+        <h4>Adding boss to: <i>@Model.DungeonName</i></h4>
+        <form asp-controller="Dungeons" asp-action="AddBoss" method="post">
+
+            <input type="hidden" asp-for="@Model.DungeonId" />
+
+            <label asp-for="BossName">NPCs:</label>
+            <p>
+                <i>If the NPC boss isn't listed, add the NPC to the site first.</i>
+            </p>
+            <p>
+                @{var npcs = Model.NPCs.OrderBy(x => x.Name).Select(x => x.Name).ToList(); }
+                <select asp-for="BossName" asp-items="@(new SelectList(npcs))"></select>
+            </p>
+            <button type="submit" class="btn">Add boss</button>
+        </form>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-12">
+        <form asp-controller="Dungeons" asp-action="Details" asp-route-id="@Model.DungeonId">
+            <button type="submit" class="btn">Back to dungeon</button>
+        </form>
+    </div>
+</div>
+<br />
