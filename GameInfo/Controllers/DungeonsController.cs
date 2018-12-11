@@ -183,6 +183,44 @@ namespace GameInfo.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RemoveBoss(DungeonDetailsViewModel model)
+        {
+            var dungeon = _dungeonsService.ById(model.Id);
+
+            var boss = _NPCsService.ById(model.BossId);
+
+            if (boss == null || dungeon == null)
+            {
+                return Redirect("/Dungeons");
+            }
+
+            await _dungeonsService.RemoveBoss(dungeon, boss);
+
+            return Redirect("/Dungeons/Details/" + dungeon.Id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RemoveItem(DungeonDetailsViewModel model)
+        {
+            var dungeon = _dungeonsService.ById(model.Id);
+
+            var item = _itemsService.ById(model.ItemId);
+
+            if (item == null || dungeon == null)
+            {
+                return Redirect("/Dungeons");
+            }
+
+            await _dungeonsService.RemoveItem(dungeon, item);
+
+            return Redirect("/Dungeons/Details/" + dungeon.Id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var success = _dungeonsService.Delete(id);

@@ -108,5 +108,23 @@ namespace GameInfo.Services
 
             return false;
         }
+
+        public async Task RemoveItem(Dungeon dungeon, Item item)
+        {
+            if (dungeon.Rewards.Contains(item))
+            {
+                dungeon.Rewards.Remove(item);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveBoss(Dungeon dungeon, NPC boss)
+        {
+            if (dungeon.Bosses.Contains(boss))
+            {
+                dungeon.Bosses.Remove(boss);
+                await _db.SaveChangesAsync();
+            }
+        }
     }
 }

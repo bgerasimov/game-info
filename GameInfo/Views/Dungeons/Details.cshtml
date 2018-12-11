@@ -29,6 +29,7 @@
         <h3 style="border-bottom: solid 1px white">Bosses:</h3>
         @if (Model.Bosses.Count != 0)
         {
+            int counter = 0;
             foreach (var boss in Model.Bosses)
             {
                 <div class="row" style="margin: 0; padding-bottom: 5px">
@@ -36,11 +37,12 @@
                         <a asp-controller="NPCs" asp-action="Details" asp-route-id="@boss.Id" style="float: left; color: white">@boss.Name</a>
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <form style="float: right" asp-controller="Dungeons" asp-action="RemoveBoss" id="bossRemovalForm" method="post">
-                                <input type="hidden" asp-for="@Model.Id" />
+                            <form style="float: right" asp-controller="Dungeons" asp-action="RemoveBoss" id="@("bossRemovalForm" + counter)" method="post">
+                                <input type="hidden" asp-for="@Model.Id" value="@Model.Id"/>
                                 <input type="hidden" asp-for="@Model.BossId" value="@boss.Id" />
-                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('bossRemovalForm').submit();">Remove boss from dungeon</a>
+                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('@("bossRemovalForm" + counter)').submit();">Remove boss from dungeon</a>
                             </form>
+                            counter++;
                         }
                     </div>
                 </div>
@@ -58,6 +60,7 @@
         <hr style="background-color: white" />
         @if (Model.ItemRewards.Count != 0)
         {
+            int counter = 0;
             foreach (var item in Model.ItemRewards)
             {
                 <div class="row" style="border-bottom: solid 1px #6B6B6B; margin-left: 0; margin-right: 0">
@@ -67,11 +70,12 @@
                         </a>
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <form style="float: right" asp-controller="Dungeons" asp-action="RemoveItem" id="itemRemovalForm" method="post">
+                            <form style="float: right" asp-controller="Dungeons" asp-action="RemoveItem" id="@("itemRemovalForm" + counter)" method="post">
                                 <input type="hidden" asp-for="@Model.Id" />
                                 <input type="hidden" asp-for="@Model.ItemId" value="@item.Id" />
-                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('itemRemovalForm').submit();">Remove item from rewards</a>
+                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('@("itemRemovalForm" + counter)').submit();">Remove item from rewards</a>
                             </form>
+                            counter++;
                         }
                     </div>
                 </div>

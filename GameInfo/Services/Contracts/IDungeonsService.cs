@@ -21,5 +21,9 @@ namespace GameInfo.Services.Contracts
         bool AddBossToDungeon(AddBossToDungeonInputModel model, NPC NPCToAdd);
 
         bool AddItemToDungeon(AddItemToDungeonInputModel model, Item itemToAdd);
+
+        Task RemoveBoss(Dungeon dungeon, NPC boss);
+
+        Task RemoveItem(Dungeon dungeon, Item item);
     }
 }
