@@ -1,5 +1,6 @@
 ﻿using GameInfo.Data;
 using GameInfo.Models;
+using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Contracts;
 using System;
@@ -16,6 +17,18 @@ namespace GameInfo.Services
         public AchievementsService(GameInfoContext db)
         {
             _db = db;
+        }
+
+        public void Add(AddAchievementInputModel model)
+        {
+            var achievement = new Achievement
+            {
+                Name = model.Name,
+                AcquisitionConditions = model.AcquisitionConditions
+            };
+
+            this._db.Achievements.Add(achievement);
+            this._db.SaveChanges();
         }
 
         public IList<AchievementsAllViewModel> All()

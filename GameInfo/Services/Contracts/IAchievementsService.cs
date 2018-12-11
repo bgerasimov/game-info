@@ -1,4 +1,5 @@
 ﻿using GameInfo.Models;
+using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace GameInfo.Services.Contracts
     public interface IAchievementsService
     {
         IList<AchievementsAllViewModel> All();
+
+        void Add(AddAchievementInputModel model);
 
         Achievement ByName(string name);
 
