@@ -13,17 +13,17 @@
     else
     {
         <div class="row text-white" style="padding: 0px 12px 0px 12px; border-bottom: 1px solid white">
-            <div class="col-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
+            <div class="col-7 text-left" style="border-right: 1px solid white; padding-top: 1%">
                 <p><b>Quest Title</b></p>
             </div>
-            <div class="col-4 text-left" style="padding-top: 1%">
+            <div class="col-5 text-left" style="padding-top: 1%">
                 <p><b>Quest Giver</b></p>
             </div>
         </div>
         @foreach (var quest in Model.OrderBy(x => x.QuestTitle))
         {
             <div class="row text-white" style="padding: 0px 12px 0px 12px; border-bottom: 1px solid gray">
-                <div class="col-lg-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
+                <div class="col-7 text-left" style="border-right: 1px solid white; padding-top: 1%">
                     <p>
                         <a asp-controller="Quests" asp-action="Details" asp-route-id="@quest.Id" style="color:white">
                             <i>@quest.QuestTitle</i>
@@ -32,7 +32,7 @@
                 </div>
                 @if (quest.QuestGiver != null)
                 {
-                <div class="col-lg-4 text-left" style="padding-top: 1%">
+                <div class="col-5 text-left" style="padding-top: 1%">
                     <p>
                         <a asp-controller="NPCs" asp-action="Details" asp-route-id="@quest.QuestGiverId" style="color:white">
                             <i>@quest.QuestGiver</i>
@@ -42,7 +42,7 @@
                 }
                 else
                 {
-                <div class="col-lg-4 text-left" style="padding-top: 1%">
+                <div class="col-5 text-left" style="padding-top: 1%">
                     <p>
                         <i>None specified</i>
                     </p>

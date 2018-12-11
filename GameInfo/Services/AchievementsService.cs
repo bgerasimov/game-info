@@ -31,6 +31,13 @@ namespace GameInfo.Services
             return achievements;
         }
 
+        public Achievement ById(int? id)
+        {
+            var achievement = _db.Achievements.FirstOrDefault(x => x.Id == id);
+
+            return achievement;
+        }
+
         public Achievement ByName(string name)
         {
             var achievement = _db.Achievements.FirstOrDefault(x => x.Name == name);

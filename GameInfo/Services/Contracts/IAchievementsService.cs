@@ -12,5 +12,7 @@ namespace GameInfo.Services.Contracts
         IList<AchievementsAllViewModel> All();
 
         Achievement ByName(string name);
+
+        Achievement ById(int? id);
     }
 }

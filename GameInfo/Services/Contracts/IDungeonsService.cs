@@ -14,8 +14,8 @@ namespace GameInfo.Services.Contracts
 
         void Add(AddDungeonInputModel model);
 
-        //Dungeon ById(int id);
+        Dungeon ById(int id);
 
-        //bool Delete(int id);
+        bool Delete(int id);
     }
 }

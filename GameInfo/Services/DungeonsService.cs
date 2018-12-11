@@ -27,7 +27,7 @@ namespace GameInfo.Services
         {
             var dungeon = new Dungeon
             {
-                Name = model.Name                
+                Name = model.Name
             };
 
             if (model.AchievementReward != No_Achievement_Selected)
@@ -52,6 +52,27 @@ namespace GameInfo.Services
                .ToList();
 
             return dungeons;
+        }
+
+        public Dungeon ById(int id)
+        {
+            var dungeon = _db.Dungeons.Include(x => x.Rewards).Include(x => x.Bosses).FirstOrDefault(x => x.Id == id);
+
+            return dungeon;
+        }
+
+        public bool Delete(int id)
+        {
+            var dungeon = this.ById(id);
+
+            if (dungeon != null)
+            {
+                _db.Dungeons.Remove(dungeon);
+                _db.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

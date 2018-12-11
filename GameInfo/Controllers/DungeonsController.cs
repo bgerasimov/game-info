@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GameInfo.Models.InputModels;
+using GameInfo.Models.ViewModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameInfo.Controllers
@@ -65,6 +67,49 @@ namespace GameInfo.Controllers
             _dungeonsService.Add(inputModel);
 
             return Redirect("/Dungeons");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var dungeon = _dungeonsService.ById(id);
+
+            if (dungeon == null)
+            {
+                return Redirect("/Dungeons");
+            }
+
+            var viewModel = new DungeonDetailsViewModel
+            {
+                Id = dungeon.Id,
+                Name = dungeon.Name,
+                Bosses = dungeon.Bosses.Select(x => new NPCsAllViewModel { Id = x.Id, Name = x.Name }).ToList(),
+                ItemRewards = dungeon.Rewards.Select(x => new ItemsAllViewModel { Id = x.Id, Name = x.Name }).ToList()
+            };
+                        
+            viewModel.AchievementRewardName = _achievementsService.ById(dungeon.AchievementRewardId)?.Name;
+            viewModel.AchievementRewardId = _achievementsService.ById(dungeon.AchievementRewardId)?.Id;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int id)
+        {
+            var success = _dungeonsService.Delete(id);
+
+            if (success)
+            {
+                return Redirect("/Dungeons/DeleteSuccess");
+            }
+
+            return Redirect("/Dungeons/Index");
+        }
+
+        public IActionResult DeleteSuccess()
+        {
+            return View();
         }
     }
 }

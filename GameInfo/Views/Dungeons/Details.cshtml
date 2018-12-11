@@ -1,0 +1,110 @@
+﻿@model GameInfo.Models.ViewModels.DungeonDetailsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<GameInfoUser> SignInManager
+
+<div class="row text-white" style="padding-left: 4%; padding-top: 4%; margin-left: 1%; margin-right: 1%; border-bottom: solid 1px white">
+    <div class="col-lg-7" style="border-right: solid 1px white">
+        <h3 style="border-bottom: solid 1px white">Name: <i>@Model.Name</i></h3>
+        <h5>
+            Achievement Awarded:
+            <br />
+            @if (Model.AchievementRewardName != null)
+            {
+                <a asp-controller="Achievements" asp-action="Details" asp-route-id="@Model.AchievementRewardId" style="float: left; color: white"><i>@Model.AchievementRewardName</i></a>
+            }
+            else
+            {
+                <i>None</i>
+            }
+            <br />
+        </h5>
+    </div>
+    <div class="col-lg-5">
+        <h3 style="border-bottom: solid 1px white">Bosses:</h3>
+        @if (Model.Bosses.Count != 0)
+        {
+            foreach (var boss in Model.Bosses)
+            {
+                <div class="row" style="margin: 0; padding-bottom: 5px">
+                    <div class="col-12" style="margin:0; padding: 0">
+                        <a asp-controller="NPCs" asp-action="Details" asp-route-id="@boss.Id" style="float: left; color: white">@boss.Name</a>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <form style="float: right" asp-controller="Dungeons" asp-action="RemoveBoss" id="bossRemovalForm" method="post">
+                                <input type="hidden" asp-for="@Model.Id" />
+                                <input type="hidden" asp-for="@Model.BossId" value="@boss.Id" />
+                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('bossRemovalForm').submit();">Remove boss from dungeon</a>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h5>No bosses have been added yet.</h5>
+        }
+    </div>
+</div>
+<div class="row text-white" style="padding-left: 4%; padding-top: 2%; padding-bottom: 3%; margin-right: 1%;">
+    <div class="col-lg-12">
+        <h3>Item rewards:</h3>
+        <hr style="background-color: white" />
+        @if (Model.ItemRewards.Count != 0)
+        {
+            foreach (var item in Model.ItemRewards)
+            {
+                <div class="row" style="border-bottom: solid 1px #6B6B6B; margin-left: 0; margin-right: 0">
+                    <div class="col-lg-12 text-left">
+                        <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="float: left; color: white">
+                            @item.Name
+                        </a>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <form style="float: right" asp-controller="NPCs" asp-action="RemoveItem" id="itemRemovalForm" method="post">
+                                <input type="hidden" asp-for="@Model.Id" />
+                                <input type="hidden" asp-for="@Model.ItemId" value="@item.Id" />
+                                <a style="color: #D51414" href="javascript:{}" onclick="document.getElementById('itemRemovalForm').submit();">Remove item from rewards</a>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h5>No item rewards have been added yet.</h5>
+        }
+    </div>
+</div>
+<div class="row" style="padding-bottom: 2%; padding-top: 1%; margin-left:1%; margin-right: 1%; border-top: solid 1px white">
+    <div class="col-lg-2">
+        <form asp-controller="Dungeons" asp-action="AddBoss" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn">Add boss</button>
+        </form>
+    </div>
+    <div class="col-lg-2">
+        <form asp-controller="Dungeons" asp-action="AddItem" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn">Add item</button>
+        </form>
+    </div>
+    <div class="col-lg-6 text-right">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <form asp-controller="Dungeons" asp-action="Delete" asp-route-id="@Model.Id">
+                <button type="submit" class="btn" style="background-color:#D51818">Delete dungeon</button>
+            </form>
+        }
+    </div>
+    <div class="col-lg-2 text-right">
+        <form asp-controller="Dungeons" asp-action="Index" method="get">
+            <button type="submit" class="btn">Back to all</button>
+        </form>
+    </div>
+</div>

@@ -18,6 +18,7 @@ namespace GameInfo.Models
         public string Name { get; set; }
 
         public Achievement AchievementReward { get; set; }
+        public int? AchievementRewardId { get; set; }
 
         public List<NPC> Bosses { get; set; }
 

@@ -23,14 +23,14 @@
         @foreach (var dungeon in Model.OrderBy(x => x.Name))
         {
             <div class="row text-white" style="padding: 0px 12px 0px 12px; border-bottom: 1px solid gray">
-                <div class="col-lg-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
+                <div class="col-8 text-left" style="border-right: 1px solid white; padding-top: 1%">
                     <p>
                         <a asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" style="color:white">
                             <i>@dungeon.Name</i>
                         </a>
                     </p>
                 </div>
-                <div class="col-lg-4 text-left" style="padding-top: 1%">
+                <div class="col-4 text-left" style="padding-top: 1%">
                     <p>
                         <i>@dungeon.BossCount</i>
                     </p>
