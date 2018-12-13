@@ -6,6 +6,7 @@ using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace GameInfo.Controllers
 {
     public class RacesController : Controller
     {
+        private const string Races_Root_Path = "/Races";
         private readonly IRacesService _racesService;
         private readonly IProfessionsService _professionsService;
         private readonly AuthorizerService _authorizerService;
@@ -40,7 +42,7 @@ namespace GameInfo.Controllers
                 return View();
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -54,7 +56,7 @@ namespace GameInfo.Controllers
 
             _racesService.Add(inputModel);
 
-            return Redirect("/Races");
+            return Redirect(Races_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -63,7 +65,7 @@ namespace GameInfo.Controllers
 
             if (race == null)
             {
-                return Redirect("/Races");
+                return Redirect(Races_Root_Path);
             }
 
             var model = new RaceDetailsViewModel
@@ -89,14 +91,14 @@ namespace GameInfo.Controllers
 
             if (user == null)
             {
-                return Redirect("/Account/Login");
+                return Redirect(GlobalConstants.Default_Login_Page);
             }
 
             var race = _racesService.ById(id);
 
             if (race == null)
             {
-                return Redirect("/Races");
+                return Redirect(Races_Root_Path);
             }
 
             var model = new AddProfessionToRaceInputModel
@@ -135,7 +137,7 @@ namespace GameInfo.Controllers
                 return Redirect("/Races/DeleteSuccess");
             }
 
-            return Redirect("/Races/Index");
+            return Redirect(Races_Root_Path);
         }
 
         public IActionResult DeleteSuccess()

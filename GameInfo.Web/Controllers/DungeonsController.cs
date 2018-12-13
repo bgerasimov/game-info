@@ -6,6 +6,7 @@ using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace GameInfo.Controllers
 {
     public class DungeonsController : Controller
     {
+        private const string Dungeons_Root_Path = "/Dungeons";
         private readonly IDungeonsService _dungeonsService;
         private readonly IAchievementsService _achievementsService;
         private readonly IItemsService _itemsService;
@@ -53,7 +55,7 @@ namespace GameInfo.Controllers
                 return View(model);
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -72,7 +74,7 @@ namespace GameInfo.Controllers
 
             _dungeonsService.Add(inputModel);
 
-            return Redirect("/Dungeons");
+            return Redirect(Dungeons_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -81,7 +83,7 @@ namespace GameInfo.Controllers
 
             if (dungeon == null)
             {
-                return Redirect("/Dungeons");
+                return Redirect(Dungeons_Root_Path);
             }
 
             var viewModel = new DungeonDetailsViewModel
@@ -104,14 +106,14 @@ namespace GameInfo.Controllers
 
             if (user == null)
             {
-                return Redirect("/Account/Login");
+                return Redirect(GlobalConstants.Default_Login_Page);
             }
 
             var dungeon = _dungeonsService.ById(id);
 
             if (dungeon == null)
             {
-                return Redirect("/Dungeons");
+                return Redirect(Dungeons_Root_Path);
             }
 
             var model = new AddBossToDungeonInputModel
@@ -145,14 +147,14 @@ namespace GameInfo.Controllers
 
             if (user == null)
             {
-                return Redirect("/Account/Login");
+                return Redirect(GlobalConstants.Default_Login_Page);
             }
 
             var dungeon = _dungeonsService.ById(id);
 
             if (dungeon == null)
             {
-                return Redirect("/Dungeons");
+                return Redirect(Dungeons_Root_Path);
             }
 
             var model = new AddItemToDungeonInputModel
@@ -191,12 +193,12 @@ namespace GameInfo.Controllers
 
             if (boss == null || dungeon == null)
             {
-                return Redirect("/Dungeons");
+                return Redirect(Dungeons_Root_Path);
             }
 
             await _dungeonsService.RemoveBoss(dungeon, boss);
 
-            return Redirect("/Dungeons/Details/" + dungeon.Id);
+            return RedirectToAction("Details", new { id = dungeon.Id });
         }
 
         [HttpPost]
@@ -210,12 +212,12 @@ namespace GameInfo.Controllers
 
             if (item == null || dungeon == null)
             {
-                return Redirect("/Dungeons");
+                return Redirect(Dungeons_Root_Path);
             }
 
             await _dungeonsService.RemoveItem(dungeon, item);
 
-            return Redirect("/Dungeons/Details/" + dungeon.Id);
+            return RedirectToAction("Details", new { id = dungeon.Id });
         }
 
         [HttpPost]
@@ -230,7 +232,7 @@ namespace GameInfo.Controllers
                 return Redirect("/Dungeons/DeleteSuccess");
             }
 
-            return Redirect("/Dungeons/Index");
+            return Redirect(Dungeons_Root_Path);
         }
 
         public IActionResult DeleteSuccess()

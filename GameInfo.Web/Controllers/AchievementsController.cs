@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GameInfo.Models.InputModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace GameInfo.Controllers
 {
     public class AchievementsController : Controller
     {
+        private const string Achievements_Root_Path = "/Achievements";
         private readonly IAchievementsService _achievementsService;
         private readonly IItemsService _itemsService;
         private readonly AuthorizerService _authorizerService;
@@ -41,7 +43,7 @@ namespace GameInfo.Controllers
                 return View();
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -55,7 +57,7 @@ namespace GameInfo.Controllers
 
             _achievementsService.Add(inputModel);
 
-            return Redirect("/Achievements");
+            return Redirect(Achievements_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -64,7 +66,7 @@ namespace GameInfo.Controllers
 
             if (achievement == null)
             {
-                return Redirect("/Achievements");
+                return Redirect(Achievements_Root_Path);
             }
 
             return View(achievement);
@@ -76,14 +78,14 @@ namespace GameInfo.Controllers
 
             if (user == null)
             {
-                return Redirect("/Account/Login");
+                return Redirect(GlobalConstants.Default_Login_Page);
             }
 
             var achievement = _achievementsService.ById(id);
 
             if (achievement == null)
             {
-                return Redirect("/Achievements");
+                return Redirect(Achievements_Root_Path);
             }
 
             var model = new AddItemToAchievementInputModel
@@ -122,7 +124,7 @@ namespace GameInfo.Controllers
                 return Redirect("/Achievements/DeleteSuccess");
             }
 
-            return Redirect("/Achievements/Index");
+            return Redirect(Achievements_Root_Path);
         }
 
         public IActionResult DeleteSuccess()

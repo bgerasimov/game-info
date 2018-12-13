@@ -3,6 +3,7 @@ using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,6 +15,7 @@ namespace GameInfo.Controllers
 {
     public class ProfessionsController : Controller
     {
+        private const string Professions_Root_Path = "/Professions";
         private readonly IProfessionsService _professionsService;
         private readonly IRacesService _racesService;
         private readonly AuthorizerService _authorizerService;
@@ -48,7 +50,7 @@ namespace GameInfo.Controllers
                 return View(model);
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -69,7 +71,7 @@ namespace GameInfo.Controllers
 
             _professionsService.Add(inputModel);
 
-            return Redirect("/Professions");
+            return Redirect(Professions_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -78,7 +80,7 @@ namespace GameInfo.Controllers
 
             if (profession == null)
             {
-                return Redirect("/Professions");
+                return Redirect(Professions_Root_Path);
             }
 
             var viewModel = new ProfessionDetailsViewModel
@@ -114,7 +116,7 @@ namespace GameInfo.Controllers
 
             if (race == null || profession == null)
             {
-                return Redirect("/Professions");
+                return Redirect(Professions_Root_Path);
             }
 
             await _professionsService.RemoveRace(profession, race);
@@ -134,7 +136,7 @@ namespace GameInfo.Controllers
                 return Redirect("/Professions/DeleteSuccess");
             }
 
-            return Redirect("/Professions/Index");
+            return Redirect(Professions_Root_Path);
         }
 
         public IActionResult DeleteSuccess()

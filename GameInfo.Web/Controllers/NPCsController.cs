@@ -7,6 +7,7 @@ using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace GameInfo.Controllers
 {
     public class NPCsController : Controller
     {
+        private const string NPCs_Root_Path = "/NPCs";
         private readonly INPCsService _NPCsService;
         private readonly AuthorizerService _authorizerService;
         private readonly IItemsService _itemsService;
@@ -46,7 +48,7 @@ namespace GameInfo.Controllers
                 return View();
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -60,7 +62,7 @@ namespace GameInfo.Controllers
 
             _NPCsService.Add(inputModel);
 
-            return Redirect("/NPCs");
+            return Redirect(NPCs_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -69,7 +71,7 @@ namespace GameInfo.Controllers
 
             if (npc == null)
             {
-                return Redirect("/NPCs");
+                return Redirect(NPCs_Root_Path);
             }
 
             var viewModel = new NPCDetailsViewModel
@@ -89,14 +91,14 @@ namespace GameInfo.Controllers
 
             if (user == null)
             {
-                return Redirect("/Account/Login");
+                return Redirect(GlobalConstants.Default_Login_Page);
             }
 
             var npc = _NPCsService.ById(id);
 
             if (npc == null)
             {
-                return Redirect("/NPCs");
+                return Redirect(NPCs_Root_Path);
             }
 
             var model = new AddItemToNPCInputModel
@@ -129,14 +131,14 @@ namespace GameInfo.Controllers
 
             if (user == null)
             {
-                return Redirect("/Account/Login");
+                return Redirect(GlobalConstants.Default_Login_Page);
             }
 
             var npc = _NPCsService.ById(id);
 
             if (npc == null)
             {
-                return Redirect("/NPCs");
+                return Redirect(NPCs_Root_Path);
             }
 
             var model = new AddQuestToNPCInputModel
@@ -175,12 +177,12 @@ namespace GameInfo.Controllers
 
             if (quest == null || npc == null)
             {
-                return Redirect("/NPCs");
+                return Redirect(NPCs_Root_Path);
             }
             
             await _NPCsService.RemoveQuest(npc, quest);
-            
-            return Redirect("/NPCs/Details/" + npc.Id);
+
+            return RedirectToAction("Details", new { id = npc.Id });
         }
 
         [HttpPost]
@@ -194,12 +196,12 @@ namespace GameInfo.Controllers
 
             if (item == null || npc == null)
             {
-                return Redirect("/NPCs");
+                return Redirect(NPCs_Root_Path);
             }
 
             await _NPCsService.RemoveItem(npc, item);
 
-            return Redirect("/NPCs/Details/" + npc.Id);
+            return RedirectToAction("Details", new { id = npc.Id });
         }
 
         [HttpPost]
@@ -214,7 +216,7 @@ namespace GameInfo.Controllers
                 return Redirect("/NPCs/DeleteSuccess");
             }
 
-            return Redirect("/NPCs/Index");
+            return Redirect(NPCs_Root_Path);
         }
 
         public IActionResult DeleteSuccess()

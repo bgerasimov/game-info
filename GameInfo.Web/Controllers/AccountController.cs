@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GameInfo.Models;
 using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,8 @@ namespace GameInfo.Controllers
 {
     public class AccountController : Controller
     {
-        private const string LoginErrorMessage = "Username or password not found.";
+        private const string Login_Error_Message = "Username or password not found.";
+
         private readonly UserManager<GameInfoUser> _userManager;
         private readonly SignInManager<GameInfoUser> _signInManager;
 
@@ -39,7 +41,7 @@ namespace GameInfo.Controllers
                 return View(accountViewModel);
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
         
         [HttpPost]
@@ -64,7 +66,7 @@ namespace GameInfo.Controllers
                 return View();
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
         
         public IActionResult Login()
@@ -91,7 +93,7 @@ namespace GameInfo.Controllers
                 }
             }
 
-            ModelState.AddModelError("", LoginErrorMessage);
+            ModelState.AddModelError("", Login_Error_Message);
             return View(loginInputModel);
         }
         

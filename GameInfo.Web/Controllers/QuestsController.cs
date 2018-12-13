@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GameInfo.Models.InputModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace GameInfo.Controllers
 {
     public class QuestsController : Controller
     {
+        private const string Quests_Root_Path = "/Quests";
         private readonly IQuestsService _questsService;
         private readonly AuthorizerService _authorizerService;
         private readonly INPCsService _NPCsService;
@@ -44,7 +46,7 @@ namespace GameInfo.Controllers
                 return View(model);
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -62,7 +64,7 @@ namespace GameInfo.Controllers
 
             _questsService.Add(inputModel);
 
-            return Redirect("/Quests");
+            return Redirect(Quests_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -71,7 +73,7 @@ namespace GameInfo.Controllers
 
             if (quest == null)
             {
-                return Redirect("/Quests");
+                return Redirect(Quests_Root_Path);
             }
 
             return View(quest);
@@ -89,7 +91,7 @@ namespace GameInfo.Controllers
                 return Redirect("/Quests/DeleteSuccess");
             }
 
-            return Redirect("/Quests/Index");
+            return Redirect(Quests_Root_Path);
         }
 
         public IActionResult DeleteSuccess()

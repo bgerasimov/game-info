@@ -4,6 +4,7 @@ using GameInfo.Models.InputModels;
 using GameInfo.Models.ViewModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace GameInfo.Controllers
 {
     public class GuidesController : Controller
     {
+        private const string Guides_Root_Path = "/Guides";
         private readonly IGuidesService _guidesService;
         private readonly AuthorizerService _authorizerService;
         private readonly UserManager<GameInfoUser> _userManager;
@@ -45,7 +47,7 @@ namespace GameInfo.Controllers
                 return View();
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -66,7 +68,7 @@ namespace GameInfo.Controllers
             var currentUser = await _userManager.GetUserAsync(User);
             _guidesService.Add(inputModel, currentUser);
 
-            return Redirect("/Guides");
+            return Redirect(Guides_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -75,7 +77,7 @@ namespace GameInfo.Controllers
 
             if (guide == null)
             {
-                return Redirect("/Guides");
+                return Redirect(Guides_Root_Path);
             }
 
             var model = new GuideDetailsViewModel
@@ -110,7 +112,7 @@ namespace GameInfo.Controllers
                 return Redirect("/Guides/DeleteSuccess");
             }
             
-            return Redirect("/Guides/Index");
+            return Redirect(Guides_Root_Path);
         }
 
         public IActionResult DeleteSuccess()

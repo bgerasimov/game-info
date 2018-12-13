@@ -7,6 +7,7 @@ using GameInfo.Models;
 using GameInfo.Models.InputModels;
 using GameInfo.Services.Authorization;
 using GameInfo.Services.Contracts;
+using GameInfo.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace GameInfo.Controllers
 {
     public class ItemsController : Controller
     {
+        private const string Items_Root_Path = "/Items";
         private readonly IItemsService _itemsService;
         private readonly AuthorizerService _authorizerService;
 
@@ -39,7 +41,7 @@ namespace GameInfo.Controllers
                 return View();
             }
 
-            return Redirect("/Account/Login");
+            return Redirect(GlobalConstants.Default_Login_Page);
         }
 
         [HttpPost]
@@ -53,7 +55,7 @@ namespace GameInfo.Controllers
 
             _itemsService.Add(inputModel);
         
-            return Redirect("/Items");
+            return Redirect(Items_Root_Path);
         }
 
         public IActionResult Details(int id)
@@ -62,7 +64,7 @@ namespace GameInfo.Controllers
 
             if (item == null)
             {
-                return Redirect("/Items");
+                return Redirect(Items_Root_Path);
             }
 
             return View(item);
@@ -80,7 +82,7 @@ namespace GameInfo.Controllers
                 return Redirect("/Items/DeleteSuccess");
             }
 
-            return Redirect("/Items/Index");
+            return Redirect(Items_Root_Path);
         }
 
         public IActionResult DeleteSuccess()
