@@ -31,7 +31,8 @@
                 @await Html.PartialAsync("_LoginPartial")
             </ul>
             <form class="form-inline my-2 my-md-0" asp-controller="Home" asp-action="Search" method="get">
-                <input class="form-control" type="text" placeholder="Search">
+                <input class="form-control" type="text" placeholder="Search" name="searchQuery">
+                <button class="btn" type="submit" style="margin-left: 6px">Search</button>
             </form>
         </div>
     </nav>

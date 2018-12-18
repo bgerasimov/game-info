@@ -1,0 +1,154 @@
+﻿@model GameInfo.Models.ViewModels.SearchViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row text-white" style="padding:2%">
+    <div class="col-lg-2" style="border: 1px solid white; border-radius: 6px; padding: 1%">
+        @{ var linkItems = new string[] { "Guides", "Items", "NPCs", "Races", "Professions", "Quests", "Dungeons", "Achievements" };}
+
+        @for (int i = 0; i < linkItems.Length; i++)
+        {
+            <p style="border-bottom: 1px solid gray">
+                <a href="javascript:{}" onclick="AwaitFunction('@linkItems[i]')" style="color: white">@linkItems[i]</a>
+            </p>
+        }
+    </div>
+    <div class="col-lg-2" style="padding-bottom:1%"></div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: block" id="Guides">
+        @if (Model.Guides.Count() != 0)
+        {
+            foreach (var guide in Model.Guides)
+            {
+                <h5>
+                    <a asp-controller="Guides" asp-action="Details" asp-route-id="@guide.Id" style="color: white">@guide.Title</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: none" id="Items">
+        @if (Model.Items.Count() != 0)
+        {
+            foreach (var item in Model.Items)
+            {
+                <h5>
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" style="color: white">@item.Name</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: none" id="NPCs">
+        @if (Model.NPCs.Count() != 0)
+        {
+            foreach (var NPC in Model.NPCs)
+            {
+                <h5>
+                    <a asp-controller="NPCs" asp-action="Details" asp-route-id="@NPC.Id" style="color: white">@NPC.Name</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: none" id="Races">
+        @if (Model.Races.Count() != 0)
+        {
+            foreach (var race in Model.Races)
+            {
+                <h5>
+                    <a asp-controller="Races" asp-action="Details" asp-route-id="@race.Id" style="color: white">@race.Name</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: none" id="Professions">
+        @if (Model.Professions.Count() != 0)
+        {
+            foreach (var profession in Model.Professions)
+            {
+                <h5>
+                    <a asp-controller="Professions" asp-action="Details" asp-route-id="@profession.Id" style="color: white">@profession.Name</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: none" id="Quests">
+        @if (Model.Quests.Count() != 0)
+        {
+            foreach (var quest in Model.Quests)
+            {
+                <h5>
+                    <a asp-controller="Quests" asp-action="Details" asp-route-id="@quest.Id" style="color: white">@quest.Title</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: none" id="Dungeons">
+        @if (Model.Dungeons.Count() != 0)
+        {
+            foreach (var dungeon in Model.Dungeons)
+            {
+                <h5>
+                    <a asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" style="color: white">@dungeon.Name</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+    <div class="col-lg-6 text-center search-result" style="border: 1px solid white; border-radius: 6px; padding: 1%; display: none" id="Achievements">
+        @if (Model.Achievements.Count() != 0)
+        {
+            foreach (var achievement in Model.Achievements)
+            {
+                <h5>
+                    <a asp-controller="Achievements" asp-action="Details" asp-route-id="@achievement.Id" style="color: white">@achievement.Name</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5>No results of this type were found.</h5>
+        }
+    </div>
+
+</div>
+<div class="row" style="padding-bottom: 2%">
+    <div class="col-12 text-center">
+        <form asp-controller="Home" asp-action="Index" method="get">
+            <button type="submit" class="btn">Back to Index</button>
+        </form>
+    </div>
+</div>

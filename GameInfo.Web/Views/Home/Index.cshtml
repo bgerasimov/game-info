@@ -17,7 +17,7 @@ else
     </div>
     foreach (var guide in Model.OrderByDescending(x => x.Id).Take(5))
     {
-    <div class="row text-left" style="float:none; padding:12px; margin-left:10px; margin-right:10px; border-left: 1px solid lightgray; border-bottom: 1px solid lightgray; border-radius: 6px">
+    <div class="row text-left" style="float: none; padding: 12px; margin-left: 10px; margin-right: 10px; border-left: 1px solid lightgray; border-bottom: 1px solid lightgray; border-radius: 6px">
         <div class="col-lg-1">
             <img src="@guide.UserAvatar" alt="Account avatar" style="height: 50px; width: 50px; margin-left: 12px; margin-bottom: 6px" />
         </div>
