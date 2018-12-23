@@ -30,7 +30,8 @@ namespace GameInfo.Services
                 Name = model.Name
             };
 
-            if (model.AchievementReward != No_Achievement_Selected)
+            if (model.AchievementReward != null && 
+                model.AchievementReward != No_Achievement_Selected)
             {
                 dungeon.AchievementReward = _achievementsService.ByName(model.AchievementReward);
             }
