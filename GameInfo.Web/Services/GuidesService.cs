@@ -52,8 +52,8 @@ namespace GameInfo.Services
                 .Select(g => new GuidesAllViewModel
                 {
                     Id = g.Id,
-                    UserName = g.Creator.UserName,
-                    UserAvatar = g.Creator.AvatarUrl,
+                    UserName = g.Creator?.UserName,
+                    UserAvatar = g.Creator?.AvatarUrl,
                     GuideTitle = g.Title,
                     ShortContent = g.Content.Substring(0, Math.Min(g.Content.Length, 50))
                 }).ToList();
